@@ -493,9 +493,14 @@
         }
 
         .service-list li {
-            margin-bottom: 8px;
+            margin-bottom: 12px;
             font-size: 14px;
             color: #333;
+            padding: 18px 22px;
+            border-radius: 18px;
+            border: 1px solid rgba(28, 28, 28, 0.08);
+            background: rgba(255, 255, 255, 0.8);
+            line-height: 1.7;
         }
 
         .service-list strong {
@@ -510,22 +515,30 @@
         .service-benefits {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 10px;
+            gap: 15px;
             margin: 20px 0;
         }
 
         .service-benefits span {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             font-size: 14px;
-            color: #333;
+            color: #222;
+            padding: 14px 18px;
+            border-radius: 999px;
+            border: 1px solid rgba(28, 28, 28, 0.1);
+            background: rgba(255, 255, 255, 0.7);
         }
 
         .service-benefits span::before {
-            content: '✔';
-            color: var(--accent-gold);
-            font-size: 14px;
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent-gold);
+            display: inline-flex;
+            box-shadow: 0 0 0 4px rgba(201, 169, 128, 0.15);
         }
 
         .service-label {
@@ -536,43 +549,37 @@
             margin: 10px 0 5px;
         }
 
-        .keyword-tag {
-            display: inline-flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            font-size: 11px;
-            letter-spacing: 1.2px;
-            text-transform: uppercase;
-            background: rgba(28, 28, 28, 0.05);
-            padding: 10px 14px;
-            border-radius: 999px;
-            margin-top: 15px;
-            color: #666;
-        }
-
         .why-leclat {
             padding: 120px 60px;
             background: var(--accent-ivory);
         }
 
-        .why-list {
-            list-style: none;
+        .why-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
+            gap: 20px;
+            margin-top: 50px;
         }
 
-        .why-list li {
+        .why-card {
+            background: var(--bg-primary);
+            border-radius: 18px;
+            padding: 30px;
+            min-height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border: 1px solid rgba(28, 28, 28, 0.08);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
+        }
+
+        .why-card p {
             font-size: 16px;
-            color: #2c2c2c;
-            line-height: 1.6;
-        }
-
-        .why-list li::before {
-            content: '•';
-            color: var(--accent-gold);
-            margin-right: 12px;
+            font-weight: 300;
+            line-height: 1.5;
+            color: #1f1f1f;
+            margin: 0;
         }
 
         .why-cta {
@@ -743,10 +750,10 @@
         }
 
         .franchise-details {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 40px auto 0;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 30px;
         }
 
@@ -773,19 +780,32 @@
 
         .franchise-block li {
             font-size: 14px;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             color: rgba(255, 255, 255, 0.85);
+            padding-left: 18px;
+            position: relative;
         }
 
         .franchise-block li::before {
-            content: '– ';
-            color: var(--accent-gold);
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent-gold);
         }
 
-        .franchise .keyword-tag {
-            background: rgba(255, 255, 255, 0.1);
+        .franchise .cta-primary {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            border-color: var(--bg-primary);
+        }
+
+        .franchise .cta-primary:hover {
+            background: transparent;
             color: var(--bg-primary);
-            margin-top: 30px;
         }
 
         .franchise-cta {
@@ -1183,7 +1203,7 @@
         <p data-reveal data-reveal-delay="0s">At Le Clat Advance Aesthetic Skin Clinic, Spa & Salon in Bangalore, we believe that beauty is more than just appearance – it’s about confidence, wellness, and self-care.</p>
         <p data-reveal data-reveal-delay="0.1s">From advanced skin treatments and dermatology services, to indulgent spa therapies and world-class salon experiences, our experts combine medical precision with luxury to give you the results you deserve.</p>
         <p data-reveal data-reveal-delay="0.2s">Whether you’re looking to rejuvenate your skin, relax your body, transform your look, or prepare for your big day, Le Clat is here to make it happen.</p>
-        <p data-reveal data-reveal-delay="0.25s"><em>👉 Experience the most trusted skin clinic, spa & salon in Bangalore today.</em></p>
+        <p data-reveal data-reveal-delay="0.25s"><em>Experience the most trusted skin clinic, spa & salon in Bangalore today.</em></p>
         <div class="cta-row" data-reveal data-reveal-delay="0.3s">
             <a href="#contact" class="cta-primary">Book Your Appointment</a>
             <a href="#services" class="cta-secondary">View Services</a>
@@ -1250,7 +1270,6 @@
                         <span>Therapeutic Essential Oils & Organic Products</span>
                         <span>Ideal for Stress Relief & Wellness</span>
                     </div>
-                    <span class="keyword-tag">SEO Keywords: Luxury spa in Bangalore · Best massage in Bangalore · Couples spa Bangalore · Relaxation therapies Bangalore</span>
                     <a href="#contact" class="service-link">Book a Spa Session →</a>
                 </div>
             </div>
@@ -1287,7 +1306,6 @@
                         <span>Customized Packages for Every Occasion</span>
                         <span>Bridal Lounge & Premium Grooming</span>
                     </div>
-                    <span class="keyword-tag">SEO Keywords: Best salon in Bangalore · Bridal makeup Bangalore · Hair spa Bangalore · Keratin treatment Bangalore · Premium salon services Bangalore</span>
                     <a href="#contact" class="service-link">Book a Salon Appointment →</a>
                 </div>
             </div>
@@ -1301,14 +1319,20 @@
             <h2 class="section-title cormorant-light" data-reveal data-reveal-delay="0.1s">Luxury Meets Advanced Aesthetics</h2>
             <p class="section-description" data-reveal data-reveal-delay="0.2s">We bring cosmetologists, stylists, and wellness artisans under one curated roof so every visit feels bespoke.</p>
         </div>
-        <ul class="why-list">
-            <li data-reveal data-reveal-delay="0.1s">Luxury meets Advanced Aesthetics</li>
-            <li data-reveal data-reveal-delay="0.15s">Trusted by 1000+ Clients Across Bangalore</li>
-            <li data-reveal data-reveal-delay="0.2s">Cosmetologists & Stylists Under One Roof</li>
-            <li data-reveal data-reveal-delay="0.25s">State-of-the-Art Technology & Premium Products</li>
-            <li data-reveal data-reveal-delay="0.3s">Personalized Care & High Safety Standards</li>
-        </ul>
-        <p class="why-cta" data-reveal data-reveal-delay="0.35s">👉 Le Clat is not just a Spa & Salon – it’s a lifestyle upgrade.</p>
+        <div class="why-grid">
+            <div class="why-card" data-reveal data-reveal-delay="0.1s">
+                <p>Luxury meets Advanced Aesthetics</p>
+            </div>
+            <div class="why-card" data-reveal data-reveal-delay="0.15s">
+                <p>Trusted by 1000+ Clients Across Bangalore</p>
+            </div>
+            <div class="why-card" data-reveal data-reveal-delay="0.2s">
+                <p>Cosmetologists & Stylists Under One Roof</p>
+            </div>
+            <div class="why-card" data-reveal data-reveal-delay="0.25s">
+                <p>State-of-the-Art Technology & Premium Products</p>
+            </div>
+        </div>
     </section>
 
     <!-- Experience Gallery -->
@@ -1406,39 +1430,31 @@
             <div class="franchise-block" data-reveal data-reveal-delay="0.15s">
                 <h4>Why Franchise with Le Clat?</h4>
                 <ul>
-                    <li>Established Brand in Bangalore’s Premium Market</li>
-                    <li>High ROI & Fast Payback Business Model</li>
-                    <li>Comprehensive Training & Operations Support</li>
-                    <li>Centralized Marketing & Branding Assistance</li>
-                    <li>Exclusive Franchise Territory</li>
+                    <li>Established brand in Bangalore’s premium market</li>
+                    <li>High ROI & fast payback business model</li>
+                    <li>Comprehensive training & operations support</li>
+                    <li>Centralized marketing & branding assistance</li>
+                    <li>Exclusive franchise territory</li>
                 </ul>
             </div>
-            <div class="franchise-block" data-reveal data-reveal-delay="0.2s">
-                <h4>Franchise Models Available</h4>
+            <div class="franchise-block" data-reveal data-reveal-delay="0.22s">
+                <h4>Models & Investment</h4>
                 <ul>
-                    <li>Spa + Salon (Full Model) – Premium Luxury Setup</li>
-                    <li>Spa + Salon Model – Mid-size Investment Model</li>
+                    <li>Spa + Salon (Full Model) – premium luxury setup</li>
+                    <li>Spa + Salon Model – mid-size investment model</li>
+                    <li>Investment: ₹30–50 Lakhs depending on model & location</li>
+                    <li>Franchise fee: flexible options available</li>
                 </ul>
             </div>
-            <div class="franchise-block" data-reveal data-reveal-delay="0.25s">
-                <h4>Investment & Support</h4>
+            <div class="franchise-block" data-reveal data-reveal-delay="0.28s">
+                <h4>Support & Partner Profile</h4>
                 <ul>
-                    <li>Investment: ₹30–50 Lakhs (depending on model & location)</li>
-                    <li>Franchise Fee: Flexible options available</li>
-                    <li>Support Includes: Training, Marketing, HR, Operations, Technology, Interior Branding</li>
-                </ul>
-            </div>
-            <div class="franchise-block" data-reveal data-reveal-delay="0.3s">
-                <h4>Ideal Franchise Partners</h4>
-                <ul>
-                    <li>Passionate about wellness & beauty industry</li>
-                    <li>Strong business acumen</li>
-                    <li>Ability to invest & manage high-end clientele</li>
+                    <li>Dedicated support: Training, Marketing, HR, Operations, Technology, Interior Branding</li>
+                    <li>Ideal partners are passionate about wellness & beauty, have strong business acumen, and can manage high-end clientele</li>
                 </ul>
             </div>
         </div>
-        <span class="keyword-tag" data-reveal data-reveal-delay="0.32s">SEO Keywords: Franchise opportunities in Bangalore · Spa franchise in India · Beauty salon franchise India</span>
-        <p class="franchise-cta" data-reveal data-reveal-delay="0.34s">👉 Apply for Franchise</p>
+        <p class="franchise-cta" data-reveal data-reveal-delay="0.34s">Ready to elevate wellness in your city? Apply for a franchise.</p>
         <div style="text-align: center; margin-top: 40px;" data-reveal data-reveal-delay="0.35s">
             <a href="#contact" class="cta-primary">Apply for Franchise</a>
         </div>
