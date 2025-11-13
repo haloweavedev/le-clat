@@ -1,0 +1,1719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Clat - Luxury Spa & Salon in Bangalore</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    
+    <!-- Lenis Smooth Scroll -->
+    <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.15/dist/lenis.css">
+    <script src="https://unpkg.com/lenis@1.3.15/dist/lenis.min.js"></script>
+
+    <!-- Embla Carousel -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/embla-carousel/8.0.0/embla-carousel.umd.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #FEFEFE;
+            --text-primary: #1c1c1c;
+            --accent-gold: #C9A980;
+            --accent-blush: #E8D5C4;
+            --accent-ivory: #F5F0EB;
+        }
+
+        html.lenis {
+            height: auto;
+        }
+
+        .lenis.lenis-smooth {
+            scroll-behavior: auto !important;
+        }
+
+        .lenis.lenis-stopped {
+            overflow: hidden;
+        }
+
+        body {
+            font-family: "Roboto", sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        section[data-reveal-parent] {
+            position: relative;
+            isolation: isolate;
+        }
+
+        [data-reveal] {
+            opacity: 0;
+            transform: translate3d(0, 40px, 0) scale(0.98);
+            filter: blur(18px);
+            transition: opacity 0.9s cubic-bezier(0.215, 0.61, 0.355, 1),
+                        transform 1.05s cubic-bezier(0.215, 0.61, 0.355, 1),
+                        filter 1s ease;
+            transition-delay: var(--reveal-delay, 0s);
+            will-change: opacity, transform, filter;
+        }
+
+        [data-reveal].is-visible {
+            opacity: 1;
+            transform: translate3d(0, 0, 0) scale(1);
+            filter: blur(0);
+        }
+
+        .cormorant-light {
+            font-family: "Cormorant Garamond", serif;
+            font-weight: 300;
+            font-style: normal;
+        }
+
+        .cormorant-regular {
+            font-family: "Cormorant Garamond", serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        .cormorant-medium {
+            font-family: "Cormorant Garamond", serif;
+            font-weight: 500;
+            font-style: normal;
+        }
+
+        .cormorant-semibold {
+            font-family: "Cormorant Garamond", serif;
+            font-weight: 600;
+            font-style: normal;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(254, 254, 254, 0);
+            backdrop-filter: blur(10px);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        nav.scrolled {
+            background: rgba(254, 254, 254, 0.95);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+            padding: 15px 60px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 28px;
+            letter-spacing: 3px;
+            color: var(--text-primary);
+            text-transform: uppercase;
+        }
+
+        .logo img {
+            height: 48px;
+            width: auto;
+            display: block;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 300;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent-gold);
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .book-now-btn {
+            padding: 12px 30px;
+            background: transparent;
+            border: 1px solid var(--text-primary);
+            color: var(--text-primary);
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .book-now-btn:hover {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(135deg, rgba(245, 240, 235, 0.4) 0%, rgba(232, 213, 196, 0.85) 50%, rgba(28, 28, 28, 0.7) 100%), url('images/c7c69bb7-cb36-4e70-ace4-b01fd0de9274.webp');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0;
+            transform: scale(1.05);
+            filter: saturate(1.1);
+            animation: fadeIn 1.5s ease forwards;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+            padding: 0 20px;
+        }
+
+        .hero-subtitle {
+            font-size: 14px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: slideUp 1s ease 0.3s forwards;
+        }
+
+        .hero-title {
+            font-size: 82px;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: slideUp 1s ease 0.5s forwards;
+        }
+
+        .hero-description {
+            font-size: 16px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            line-height: 1.8;
+            margin-bottom: 50px;
+            opacity: 0;
+            animation: slideUp 1s ease 0.7s forwards;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            opacity: 0;
+            animation: slideUp 1s ease 0.9s forwards;
+        }
+
+        .cta-primary, .cta-secondary {
+            padding: 16px 40px;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .cta-primary {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            border: 1px solid var(--text-primary);
+        }
+
+        .cta-primary:hover {
+            background: transparent;
+            color: var(--text-primary);
+        }
+
+        .cta-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--text-primary);
+        }
+
+        .cta-secondary:hover {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+        }
+
+        /* Quick Highlights */
+        .highlights {
+            padding: 100px 60px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .highlight-card {
+            text-align: center;
+            padding: 40px 20px;
+            transition: transform 0.4s ease;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .highlight-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .highlight-card:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .highlight-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 30px;
+            background: var(--accent-ivory);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            color: var(--accent-gold);
+        }
+
+        .highlight-title {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .highlight-description {
+            font-size: 14px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            color: #555;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 120px 60px;
+            background: var(--accent-ivory);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 80px;
+        }
+
+        .section-subtitle {
+            font-size: 13px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            color: var(--accent-gold);
+        }
+
+        .section-title {
+            font-size: 54px;
+            margin-bottom: 20px;
+        }
+
+        .section-description {
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: var(--bg-primary);
+            overflow: hidden;
+            transition: all 0.5s ease;
+            cursor: pointer;
+        }
+
+        .service-card:hover {
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .service-image {
+            width: 100%;
+            height: 400px;
+            background: var(--accent-blush);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .service-card:hover .service-image img {
+            transform: scale(1.05);
+        }
+
+        .service-content {
+            padding: 40px;
+        }
+
+        .service-title {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .service-text {
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            color: #555;
+        }
+
+        .service-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: gap 0.3s ease;
+        }
+
+        .service-link:hover {
+            gap: 15px;
+        }
+
+        .brand-intro {
+            padding: 120px 60px;
+            background: var(--bg-primary);
+            max-width: 1100px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .brand-intro p {
+            font-size: 18px;
+            line-height: 1.9;
+            color: #444;
+            margin-bottom: 24px;
+        }
+
+        .brand-intro em {
+            font-style: normal;
+            color: var(--accent-gold);
+            font-weight: 500;
+        }
+
+        .cta-row {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .service-flex {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .service-lede {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .service-list {
+            list-style: none;
+            margin: 0 0 15px;
+            padding: 0;
+        }
+
+        .service-list li {
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .service-list strong {
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 12px;
+            color: var(--accent-gold);
+            margin-bottom: 5px;
+        }
+
+        .service-benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .service-benefits span {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .service-benefits span::before {
+            content: '✔';
+            color: var(--accent-gold);
+            font-size: 14px;
+        }
+
+        .service-label {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 12px;
+            color: var(--accent-gold);
+            margin: 10px 0 5px;
+        }
+
+        .keyword-tag {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            font-size: 11px;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            background: rgba(28, 28, 28, 0.05);
+            padding: 10px 14px;
+            border-radius: 999px;
+            margin-top: 15px;
+            color: #666;
+        }
+
+        .why-leclat {
+            padding: 120px 60px;
+            background: var(--accent-ivory);
+        }
+
+        .why-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .why-list li {
+            font-size: 16px;
+            color: #2c2c2c;
+            line-height: 1.6;
+        }
+
+        .why-list li::before {
+            content: '•';
+            color: var(--accent-gold);
+            margin-right: 12px;
+        }
+
+        .why-cta {
+            margin-top: 40px;
+            font-size: 18px;
+            color: #333;
+            text-align: center;
+        }
+
+        /* Experience Gallery */
+        .experience {
+            padding: 120px 60px;
+            background: var(--accent-ivory);
+        }
+
+        .experience-grid {
+            max-width: 1400px;
+            margin: 60px auto 0;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 30px;
+        }
+
+        .experience-card {
+            position: relative;
+            height: 420px;
+            overflow: hidden;
+            border-radius: 18px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+        }
+
+        .experience-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.9s cubic-bezier(0.19, 1, 0.22, 1);
+            filter: saturate(1.1);
+        }
+
+        .experience-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.65) 100%);
+            pointer-events: none;
+        }
+
+        .experience-card:hover img {
+            transform: scale(1.08);
+        }
+
+        .experience-caption {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            color: var(--bg-primary);
+            z-index: 2;
+        }
+
+        .experience-caption span {
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .experience-caption h3 {
+            font-size: 28px;
+            font-weight: 400;
+        }
+
+        /* Testimonials Carousel */
+        .testimonials {
+            padding: 120px 60px;
+            background: var(--bg-primary);
+        }
+
+        .embla {
+            overflow: hidden;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .embla__container {
+            display: flex;
+        }
+
+        .embla__slide {
+            flex: 0 0 100%;
+            min-width: 0;
+            padding: 0 20px;
+        }
+
+        .testimonial-card {
+            text-align: center;
+            padding: 60px 40px;
+        }
+
+        .testimonial-quote {
+            font-size: 24px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            font-style: italic;
+            color: #555;
+        }
+
+        .testimonial-author {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .testimonial-role {
+            font-size: 13px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+        }
+
+        .embla__dots {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 40px;
+        }
+
+        .embla__dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent-blush);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .embla__dot.is-selected {
+            background: var(--accent-gold);
+            transform: scale(1.3);
+        }
+
+        /* Franchise Section */
+        .franchise {
+            padding: 120px 60px;
+            background: linear-gradient(135deg, var(--text-primary) 0%, #2a2a2a 100%);
+            color: var(--bg-primary);
+        }
+
+        .franchise .section-subtitle {
+            color: var(--accent-gold);
+        }
+
+        .franchise .section-title {
+            color: var(--bg-primary);
+        }
+
+        .franchise .section-description {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .franchise-benefits {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            max-width: 1400px;
+            margin: 60px auto 0;
+        }
+
+        .franchise-details {
+            max-width: 1100px;
+            margin: 40px auto 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+        }
+
+        .franchise-block {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 18px;
+            padding: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .franchise-block h4 {
+            margin-bottom: 12px;
+            font-size: 16px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+        }
+
+        .franchise-block ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .franchise-block li {
+            font-size: 14px;
+            margin-bottom: 8px;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .franchise-block li::before {
+            content: '– ';
+            color: var(--accent-gold);
+        }
+
+        .franchise .keyword-tag {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--bg-primary);
+            margin-top: 30px;
+        }
+
+        .franchise-cta {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 18px;
+            color: var(--bg-primary);
+        }
+
+        .benefit-item {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .benefit-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: var(--accent-gold);
+        }
+
+        .benefit-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .benefit-text {
+            font-size: 14px;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 120px 60px;
+            background: var(--bg-primary);
+        }
+
+        .contact-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            align-items: start;
+        }
+
+        .contact-brand {
+            border: 1px solid #e8e3dc;
+            border-radius: 16px;
+            padding: 40px;
+            background: var(--accent-ivory);
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+        }
+
+        .contact-brand img {
+            max-width: 200px;
+            height: auto;
+        }
+
+        .contact-brand p {
+            font-size: 15px;
+            line-height: 1.8;
+            color: #4c4c4c;
+        }
+
+        .brand-highlights {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .brand-highlights li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            color: #444;
+        }
+
+        .brand-highlights li::before {
+            content: '✦';
+            color: var(--accent-gold);
+            font-size: 12px;
+        }
+
+        .brand-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: rgba(201, 169, 128, 0.15);
+            color: var(--text-primary);
+            padding: 10px 18px;
+            border-radius: 999px;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .form-label {
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #555;
+        }
+
+        .form-input, .form-select, .form-textarea {
+            padding: 15px 20px;
+            border: 1px solid #ddd;
+            background: var(--bg-primary);
+            font-family: "Roboto", sans-serif;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-submit {
+            padding: 16px 40px;
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            border: 1px solid var(--text-primary);
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            align-self: flex-start;
+        }
+
+        .form-submit:hover {
+            background: transparent;
+            color: var(--text-primary);
+        }
+
+        /* Footer */
+        footer {
+            padding: 80px 60px 40px;
+            background: var(--accent-ivory);
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 32px;
+            margin-bottom: 30px;
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            letter-spacing: 3px;
+        }
+
+        .footer-logo img {
+            height: 56px;
+            width: auto;
+            display: block;
+        }
+
+        .footer-info {
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            color: #555;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--text-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+        }
+
+        .footer-bottom {
+            padding-top: 30px;
+            border-top: 1px solid #ddd;
+            font-size: 12px;
+            color: #888;
+        }
+
+        /* Floating Booking Widget */
+        .floating-booking {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 999;
+            opacity: 0;
+            animation: floatIn 0.8s ease 2s forwards;
+        }
+
+        .floating-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--accent-gold);
+            color: var(--bg-primary);
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .floating-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            from {
+                transform: translateY(30px);
+            }
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+        }
+
+        @keyframes floatIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .mobile-menu-btn span {
+            width: 25px;
+            height: 2px;
+            background: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .highlights {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .experience-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .franchise-benefits {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 30px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .hero-title {
+                font-size: 48px;
+            }
+
+            .section-title {
+                font-size: 38px;
+            }
+
+            .highlights, .services, .testimonials, .franchise, .contact {
+                padding: 60px 30px;
+            }
+
+            footer {
+                padding: 60px 30px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="logo cormorant-light">
+            <img src="images/logo.png" alt="Le Clat logo mark" loading="lazy">
+        </div>
+        <ul class="nav-links">
+            <li><a href="#spa">Spa</a></li>
+            <li><a href="#salon">Salon</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#franchise">Franchise</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="book-now-btn" type="button" data-scroll-target="#contact">Book Now</button>
+        <button class="mobile-menu-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" data-reveal-parent>
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <p class="hero-subtitle cormorant-light" data-reveal data-reveal-delay="0s">Bangalore's Premier Destination</p>
+            <h1 class="hero-title cormorant-light" data-reveal data-reveal-delay="0.1s">Redefining Beauty,<br>Wellness & Skincare</h1>
+            <p class="hero-description" data-reveal data-reveal-delay="0.2s">Luxury meets advanced science at Le Clat – your destination for flawless skin, rejuvenation therapies, and premium salon services.</p>
+            <div class="hero-cta" data-reveal data-reveal-delay="0.3s">
+                <a href="#contact" class="cta-primary">Book Your Appointment</a>
+                <a href="#services" class="cta-secondary">Explore Services</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand Story -->
+    <section class="brand-intro" data-reveal-parent>
+        <p data-reveal data-reveal-delay="0s">At Le Clat Advance Aesthetic Skin Clinic, Spa & Salon in Bangalore, we believe that beauty is more than just appearance – it’s about confidence, wellness, and self-care.</p>
+        <p data-reveal data-reveal-delay="0.1s">From advanced skin treatments and dermatology services, to indulgent spa therapies and world-class salon experiences, our experts combine medical precision with luxury to give you the results you deserve.</p>
+        <p data-reveal data-reveal-delay="0.2s">Whether you’re looking to rejuvenate your skin, relax your body, transform your look, or prepare for your big day, Le Clat is here to make it happen.</p>
+        <p data-reveal data-reveal-delay="0.25s"><em>👉 Experience the most trusted skin clinic, spa & salon in Bangalore today.</em></p>
+        <div class="cta-row" data-reveal data-reveal-delay="0.3s">
+            <a href="#contact" class="cta-primary">Book Your Appointment</a>
+            <a href="#services" class="cta-secondary">View Services</a>
+        </div>
+    </section>
+
+    <!-- Quick Highlights -->
+    <section class="highlights" data-reveal-parent>
+        <div class="highlight-card" data-reveal data-reveal-delay="0s">
+            <div class="highlight-icon">✦</div>
+            <h3 class="highlight-title cormorant-medium">Luxury Spa</h3>
+            <p class="highlight-description">Experience holistic wellness with therapeutic massages and rejuvenation rituals</p>
+        </div>
+        <div class="highlight-card" data-reveal data-reveal-delay="0.1s">
+            <div class="highlight-icon">◆</div>
+            <h3 class="highlight-title cormorant-medium">Premium Salon</h3>
+            <p class="highlight-description">Expert styling, hair care, and beauty treatments with international-grade products</p>
+        </div>
+        <div class="highlight-card" data-reveal data-reveal-delay="0.2s">
+            <div class="highlight-icon">❖</div>
+            <h3 class="highlight-title cormorant-medium">Bridal Lounge</h3>
+            <p class="highlight-description">Customized bridal packages and event makeup by professional artists</p>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services" data-reveal-parent>
+        <div class="section-header">
+            <p class="section-subtitle cormorant-light" data-reveal data-reveal-delay="0s">Our Offerings</p>
+            <h2 class="section-title cormorant-light" data-reveal data-reveal-delay="0.1s">Curated Experiences</h2>
+            <p class="section-description" data-reveal data-reveal-delay="0.2s">From advanced treatments to indulgent spa therapies, we combine medical precision with luxury to give you the results you deserve.</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card" id="spa" data-reveal data-reveal-delay="0.1s">
+                <div class="service-image">
+                    <img src="images/2ae427f7-926f-49e6-a10f-7cb0e5cedf1d.webp" alt="Luxury spa ritual at Le Clat" loading="lazy">
+                </div>
+                <div class="service-content service-flex">
+                    <h3 class="service-title cormorant-medium">Luxury Spa in Bangalore – Relax, Rejuvenate, Restore</h3>
+                    <p class="service-lede">Discover holistic wellness with Le Clat Spa, where every therapy is designed to heal your body, calm your mind, and restore balance.</p>
+                    <p class="service-label">Our Spa Services:</p>
+                    <ul class="service-list">
+                        <li>
+                            <strong>Massage Therapies</strong>
+                            Swedish Massage, Aromatherapy, Hot Stone Massage, Deep Tissue Massage, Balinese Massage
+                        </li>
+                        <li>
+                            <strong>Body Treatments</strong>
+                            Body Scrubs, Wraps, Detox Therapies, Slimming Rituals
+                        </li>
+                        <li>
+                            <strong>Wellness Experiences</strong>
+                            Stress Relief Therapy, Couples Spa Packages, Rejuvenation Rituals, Head & Foot Reflexology
+                        </li>
+                        <li>
+                            <strong>Add-On Relaxations</strong>
+                            Express Spa, Back Massage, Ayurvedic Touch Therapies
+                        </li>
+                    </ul>
+                    <p class="service-label">Benefits of Our Spa:</p>
+                    <div class="service-benefits">
+                        <span>Professional & Trained Therapists</span>
+                        <span>Serene Ambience with Luxury Interiors</span>
+                        <span>Therapeutic Essential Oils & Organic Products</span>
+                        <span>Ideal for Stress Relief & Wellness</span>
+                    </div>
+                    <span class="keyword-tag">SEO Keywords: Luxury spa in Bangalore · Best massage in Bangalore · Couples spa Bangalore · Relaxation therapies Bangalore</span>
+                    <a href="#contact" class="service-link">Book a Spa Session →</a>
+                </div>
+            </div>
+            <div class="service-card" id="salon" data-reveal data-reveal-delay="0.2s">
+                <div class="service-image">
+                    <img src="images/5309b1bd-4997-4385-a34e-ccde5d507431.webp" alt="Signature salon styling session" loading="lazy">
+                </div>
+                <div class="service-content service-flex">
+                    <h3 class="service-title cormorant-medium">Premium Salon in Bangalore – Hair, Beauty & Grooming Experts</h3>
+                    <p class="service-lede">At Le Clat Salon, our stylists and beauty experts ensure you step out looking your best with cutting-edge hairstyling, skincare, grooming, and bridal services.</p>
+                    <p class="service-label">Our Salon Services:</p>
+                    <ul class="service-list">
+                        <li>
+                            <strong>Hair Care & Styling</strong>
+                            Haircuts, Styling, Hair Coloring, Highlights, Keratin Treatment, Hair Smoothening, Hair Spa
+                        </li>
+                        <li>
+                            <strong>Skin & Beauty</strong>
+                            Facials, D-Tan Treatments, Clean-ups, Waxing, Threading, De-tanning Solutions
+                        </li>
+                        <li>
+                            <strong>Hands & Feet</strong>
+                            Manicure, Pedicure, Nail Art, Nail Extensions, Gel Polish
+                        </li>
+                        <li>
+                            <strong>Bridal & Grooming Packages</strong>
+                            Bridal Makeup, Pre-Bridal Skincare Packages, Groom Makeover, Event Makeup
+                        </li>
+                    </ul>
+                    <p class="service-label">Why Choose Le Clat Salon?</p>
+                    <div class="service-benefits">
+                        <span>International-Grade Products</span>
+                        <span>Experienced Stylists & Makeup Artists</span>
+                        <span>Customized Packages for Every Occasion</span>
+                        <span>Bridal Lounge & Premium Grooming</span>
+                    </div>
+                    <span class="keyword-tag">SEO Keywords: Best salon in Bangalore · Bridal makeup Bangalore · Hair spa Bangalore · Keratin treatment Bangalore · Premium salon services Bangalore</span>
+                    <a href="#contact" class="service-link">Book a Salon Appointment →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Gallery -->
+    <section class="why-leclat" data-reveal-parent>
+        <div class="section-header" style="text-align:center;">
+            <p class="section-subtitle cormorant-light" data-reveal data-reveal-delay="0s">Why Choose Le Clat?</p>
+            <h2 class="section-title cormorant-light" data-reveal data-reveal-delay="0.1s">Luxury Meets Advanced Aesthetics</h2>
+            <p class="section-description" data-reveal data-reveal-delay="0.2s">We bring cosmetologists, stylists, and wellness artisans under one curated roof so every visit feels bespoke.</p>
+        </div>
+        <ul class="why-list">
+            <li data-reveal data-reveal-delay="0.1s">Luxury meets Advanced Aesthetics</li>
+            <li data-reveal data-reveal-delay="0.15s">Trusted by 1000+ Clients Across Bangalore</li>
+            <li data-reveal data-reveal-delay="0.2s">Cosmetologists & Stylists Under One Roof</li>
+            <li data-reveal data-reveal-delay="0.25s">State-of-the-Art Technology & Premium Products</li>
+            <li data-reveal data-reveal-delay="0.3s">Personalized Care & High Safety Standards</li>
+        </ul>
+        <p class="why-cta" data-reveal data-reveal-delay="0.35s">👉 Le Clat is not just a Spa & Salon – it’s a lifestyle upgrade.</p>
+    </section>
+
+    <!-- Experience Gallery -->
+    <section class="experience" id="experience" data-reveal-parent>
+        <div class="section-header">
+            <p class="section-subtitle cormorant-light" data-reveal data-reveal-delay="0s">Inside Le Clat</p>
+            <h2 class="section-title cormorant-light" data-reveal data-reveal-delay="0.1s">Sensory Moments</h2>
+            <p class="section-description" data-reveal data-reveal-delay="0.2s">A glimpse into our meticulously designed spaces where calm lighting, curated textures, and sensorial elements immerse you in effortless luxury.</p>
+        </div>
+        <div class="experience-grid">
+            <div class="experience-card" data-reveal data-reveal-delay="0.1s">
+                <img src="images/6d3e455e-ff24-4c39-8db2-7c9cfe858397.webp" alt="Serene spa suite at Le Clat" loading="lazy">
+                <div class="experience-caption">
+                    <span>Wellness Lounge</span>
+                    <h3>Serenity Ritual Rooms</h3>
+                </div>
+            </div>
+            <div class="experience-card" data-reveal data-reveal-delay="0.2s">
+                <img src="images/84b9c799-7111-4955-9c27-20b55fc6c257.webp" alt="Luxurious salon styling stations" loading="lazy">
+                <div class="experience-caption">
+                    <span>Salon Couture</span>
+                    <h3>Signature Styling Studio</h3>
+                </div>
+            </div>
+            <div class="experience-card" data-reveal data-reveal-delay="0.3s">
+                <img src="images/8c0b06b4-c75e-481f-a6af-a2472e7096d8.webp" alt="Fragrant lounge detail" loading="lazy">
+                <div class="experience-caption">
+                    <span>Ambient Details</span>
+                    <h3>Botanical Fragrance Bar</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" data-reveal-parent>
+        <div class="section-header">
+            <p class="section-subtitle cormorant-light" data-reveal data-reveal-delay="0s">Client Stories</p>
+            <h2 class="section-title cormorant-light" data-reveal data-reveal-delay="0.1s">What They Say</h2>
+        </div>
+        <div class="embla" id="testimonialCarousel" data-reveal data-reveal-delay="0.2s">
+            <div class="embla__container">
+                <div class="embla__slide">
+                    <div class="testimonial-card" data-reveal data-reveal-delay="0.25s">
+                        <p class="testimonial-quote cormorant-light">"An absolutely divine experience. The attention to detail and luxurious ambience made me feel pampered beyond words. Le Clat is my sanctuary."</p>
+                        <p class="testimonial-author cormorant-semibold">Priya Sharma</p>
+                        <p class="testimonial-role">Regular Client</p>
+                    </div>
+                </div>
+                <div class="embla__slide">
+                    <div class="testimonial-card" data-reveal data-reveal-delay="0.3s">
+                        <p class="testimonial-quote cormorant-light">"My bridal experience at Le Clat was flawless. The team understood my vision perfectly and made me look stunning on my special day."</p>
+                        <p class="testimonial-author cormorant-semibold">Ananya Reddy</p>
+                        <p class="testimonial-role">Bride 2024</p>
+                    </div>
+                </div>
+                <div class="embla__slide">
+                    <div class="testimonial-card" data-reveal data-reveal-delay="0.35s">
+                        <p class="testimonial-quote cormorant-light">"The spa treatments here are therapeutic and rejuvenating. I leave feeling refreshed and renewed every single time. Truly world-class service."</p>
+                        <p class="testimonial-author cormorant-semibold">Kavita Menon</p>
+                        <p class="testimonial-role">Wellness Enthusiast</p>
+                    </div>
+                </div>
+            </div>
+            <div class="embla__dots" id="testimonialDots"></div>
+        </div>
+    </section>
+
+    <!-- Franchise Section -->
+    <section class="franchise" id="franchise" data-reveal-parent>
+        <div class="section-header">
+            <p class="section-subtitle cormorant-light" data-reveal data-reveal-delay="0s">Business Opportunity</p>
+            <h2 class="section-title cormorant-light" data-reveal data-reveal-delay="0.1s">Partner with Le Clat</h2>
+            <p class="section-description" data-reveal data-reveal-delay="0.15s">Join India’s Growing Skin, Spa & Salon Brand.</p>
+            <p class="section-description" data-reveal data-reveal-delay="0.2s">With the rising demand for wellness therapies and premium salon experiences, Le Clat is expanding across India so you can build a profitable franchise business in the booming beauty & wellness industry.</p>
+        </div>
+        <div class="franchise-benefits">
+            <div class="benefit-item" data-reveal data-reveal-delay="0.1s">
+                <div class="benefit-icon">★</div>
+                <h3 class="benefit-title cormorant-medium">Established Brand</h3>
+                <p class="benefit-text">Trusted by 1000+ clients across Bangalore's premium market</p>
+            </div>
+            <div class="benefit-item" data-reveal data-reveal-delay="0.2s">
+                <div class="benefit-icon">◈</div>
+                <h3 class="benefit-title cormorant-medium">High ROI</h3>
+                <p class="benefit-text">Fast payback business model with ₹30-50 Lakhs investment</p>
+            </div>
+            <div class="benefit-item" data-reveal data-reveal-delay="0.3s">
+                <div class="benefit-icon">✧</div>
+                <h3 class="benefit-title cormorant-medium">Complete Support</h3>
+                <p class="benefit-text">Training, marketing, HR, operations, and interior branding</p>
+            </div>
+        </div>
+        <div class="franchise-details">
+            <div class="franchise-block" data-reveal data-reveal-delay="0.15s">
+                <h4>Why Franchise with Le Clat?</h4>
+                <ul>
+                    <li>Established Brand in Bangalore’s Premium Market</li>
+                    <li>High ROI & Fast Payback Business Model</li>
+                    <li>Comprehensive Training & Operations Support</li>
+                    <li>Centralized Marketing & Branding Assistance</li>
+                    <li>Exclusive Franchise Territory</li>
+                </ul>
+            </div>
+            <div class="franchise-block" data-reveal data-reveal-delay="0.2s">
+                <h4>Franchise Models Available</h4>
+                <ul>
+                    <li>Spa + Salon (Full Model) – Premium Luxury Setup</li>
+                    <li>Spa + Salon Model – Mid-size Investment Model</li>
+                </ul>
+            </div>
+            <div class="franchise-block" data-reveal data-reveal-delay="0.25s">
+                <h4>Investment & Support</h4>
+                <ul>
+                    <li>Investment: ₹30–50 Lakhs (depending on model & location)</li>
+                    <li>Franchise Fee: Flexible options available</li>
+                    <li>Support Includes: Training, Marketing, HR, Operations, Technology, Interior Branding</li>
+                </ul>
+            </div>
+            <div class="franchise-block" data-reveal data-reveal-delay="0.3s">
+                <h4>Ideal Franchise Partners</h4>
+                <ul>
+                    <li>Passionate about wellness & beauty industry</li>
+                    <li>Strong business acumen</li>
+                    <li>Ability to invest & manage high-end clientele</li>
+                </ul>
+            </div>
+        </div>
+        <span class="keyword-tag" data-reveal data-reveal-delay="0.32s">SEO Keywords: Franchise opportunities in Bangalore · Spa franchise in India · Beauty salon franchise India</span>
+        <p class="franchise-cta" data-reveal data-reveal-delay="0.34s">👉 Apply for Franchise</p>
+        <div style="text-align: center; margin-top: 40px;" data-reveal data-reveal-delay="0.35s">
+            <a href="#contact" class="cta-primary">Apply for Franchise</a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact" data-reveal-parent>
+        <div class="section-header">
+            <p class="section-subtitle cormorant-light" data-reveal data-reveal-delay="0s">Get in Touch</p>
+            <h2 class="section-title cormorant-light" data-reveal data-reveal-delay="0.1s">Book Your Appointment</h2>
+            <p class="section-description" data-reveal data-reveal-delay="0.2s">Experience luxury and transformation. Fill the form below and we'll reach out to you shortly.</p>
+        </div>
+        <div class="contact-container">
+            <div class="contact-brand" data-reveal data-reveal-delay="0.25s">
+                <img src="images/logo.jpeg" alt="Le Clat crest" loading="lazy">
+                <p>Every ritual at Le Clat is crafted by medical aestheticians and spa artisans to deliver measurable results with a couture touch.</p>
+                <ul class="brand-highlights">
+                    <li>Advance aesthetic technology suites</li>
+                    <li>International product selection</li>
+                    <li>Private bridal preparation lounge</li>
+                </ul>
+            </div>
+            <form class="contact-form" data-reveal data-reveal-delay="0.3s">
+                <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" class="form-input" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Phone Number</label>
+                    <input type="tel" class="form-input" placeholder="+91 00000 00000" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" class="form-input" placeholder="you@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Service Interested</label>
+                    <select class="form-select" required>
+                        <option value="">Select a service</option>
+                        <option value="skin-clinic">Skin Clinic</option>
+                        <option value="spa">Spa</option>
+                        <option value="salon">Salon</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Preferred Date & Time</label>
+                    <input type="datetime-local" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Special Requests / Notes</label>
+                    <textarea class="form-textarea" placeholder="Any specific requirements..."></textarea>
+                </div>
+                <button type="submit" class="form-submit">Confirm Booking</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer data-reveal-parent>
+        <div class="footer-logo cormorant-light" data-reveal data-reveal-delay="0s">
+            <img src="images/logo.png" alt="Le Clat insignia" loading="lazy">
+        </div>
+        <p class="footer-info" data-reveal data-reveal-delay="0.1s">
+            Advance Aesthetic Spa & Salon<br>
+            Bangalore, Karnataka<br>
+            info@leclat.com | +91 00000 00000
+        </p>
+        <div class="social-links" data-reveal data-reveal-delay="0.2s">
+            <a href="#" class="social-link">f</a>
+            <a href="#" class="social-link">in</a>
+            <a href="#" class="social-link">ig</a>
+            <a href="#" class="social-link">yt</a>
+        </div>
+        <div class="footer-bottom" data-reveal data-reveal-delay="0.25s">
+            <p>&copy; 2025 Le Clat. All Rights Reserved. | Privacy Policy | Terms & Conditions</p>
+        </div>
+    </footer>
+
+    <!-- Floating Booking Widget -->
+    <div class="floating-booking" data-reveal-parent>
+        <button class="floating-btn" type="button" data-scroll-target="#contact" data-reveal data-reveal-delay="0s">✦</button>
+    </div>
+
+    <script>
+        const navbar = document.getElementById('navbar');
+        const heroContent = document.querySelector('.hero-content');
+        let lenisInstance = null;
+
+        const handleScrollEffects = (scrollY) => {
+            if (navbar) {
+                if (scrollY > 100) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            }
+
+            if (heroContent) {
+                const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+                if (scrollY < viewportHeight) {
+                    const progress = scrollY / viewportHeight;
+                    heroContent.style.transform = `translateY(${progress * 80}px)`;
+                    heroContent.style.opacity = Math.max(0, 1 - progress * 0.85).toString();
+                } else {
+                    heroContent.style.transform = 'translateY(0)';
+                    heroContent.style.opacity = '0';
+                }
+            }
+        };
+
+        const scrollToTarget = (targetCandidate) => {
+            const target = typeof targetCandidate === 'string' ? document.querySelector(targetCandidate) : targetCandidate;
+            if (!target) return;
+
+            if (lenisInstance) {
+                lenisInstance.scrollTo(target, {
+                    duration: 1.2,
+                    easing: (t) => 1 - Math.pow(1 - t, 3)
+                });
+            } else {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        };
+
+        if (typeof Lenis !== 'undefined') {
+            lenisInstance = new Lenis({
+                autoRaf: true,
+                smoothWheel: true,
+                smoothTouch: false,
+                lerp: 0.08
+            });
+
+            lenisInstance.on('scroll', ({ scroll }) => handleScrollEffects(scroll));
+            handleScrollEffects(window.scrollY || window.pageYOffset);
+        } else {
+            window.addEventListener('scroll', () => handleScrollEffects(window.scrollY || window.pageYOffset));
+        }
+
+        // Smooth scroll for navigation links + CTAs
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', (e) => {
+                const targetId = anchor.getAttribute('href');
+                if (!targetId || targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (!targetElement) return;
+
+                e.preventDefault();
+                scrollToTarget(targetElement);
+            });
+        });
+
+        document.querySelectorAll('[data-scroll-target]').forEach(trigger => {
+            trigger.addEventListener('click', (e) => {
+                const selector = trigger.dataset.scrollTarget;
+                if (!selector) return;
+                e.preventDefault();
+                scrollToTarget(selector);
+            });
+        });
+
+        // Embla Carousel for Testimonials
+        const emblaNode = document.getElementById('testimonialCarousel');
+        const dotsNode = document.getElementById('testimonialDots');
+        
+        if (emblaNode && typeof EmblaCarousel !== 'undefined') {
+            const embla = EmblaCarousel(emblaNode, {
+                loop: true,
+                align: 'center',
+                skipSnaps: false
+            });
+
+            // Create dots
+            const slides = embla.slideNodes();
+            slides.forEach((_, index) => {
+                const dot = document.createElement('button');
+                dot.className = 'embla__dot';
+                dot.addEventListener('click', () => embla.scrollTo(index));
+                dotsNode.appendChild(dot);
+            });
+
+            const updateDots = () => {
+                const dots = dotsNode.querySelectorAll('.embla__dot');
+                dots.forEach((dot, index) => {
+                    if (index === embla.selectedScrollSnap()) {
+                        dot.classList.add('is-selected');
+                    } else {
+                        dot.classList.remove('is-selected');
+                    }
+                });
+            };
+
+            embla.on('select', updateDots);
+            updateDots();
+
+            // Auto-play
+            const autoplay = () => {
+                if (embla.canScrollNext()) {
+                    embla.scrollNext();
+                } else {
+                    embla.scrollTo(0);
+                }
+            };
+
+            let autoplayInterval = setInterval(autoplay, 5000);
+
+            emblaNode.addEventListener('mouseenter', () => {
+                clearInterval(autoplayInterval);
+            });
+
+            emblaNode.addEventListener('mouseleave', () => {
+                autoplayInterval = setInterval(autoplay, 5000);
+            });
+        }
+
+        // Form submission
+        const contactForm = document.querySelector('.contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Thank you for your booking request! We will contact you shortly.');
+                e.target.reset();
+            });
+        }
+
+        // Framer-style reveal animations
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.2,
+            rootMargin: '0px 0px -10% 0px'
+        });
+
+        document.querySelectorAll('[data-reveal]').forEach((el, index) => {
+            const delay = el.dataset.revealDelay || `${Math.min(index * 0.05, 0.45)}s`;
+            el.style.setProperty('--reveal-delay', delay);
+            revealObserver.observe(el);
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', function() {
+                const navLinks = document.querySelector('.nav-links');
+                const spans = this.querySelectorAll('span');
+                
+                if (navLinks.style.display === 'flex') {
+                    navLinks.style.display = 'none';
+                    spans.forEach(span => span.style.transform = 'none');
+                } else {
+                    navLinks.style.display = 'flex';
+                    navLinks.style.flexDirection = 'column';
+                    navLinks.style.position = 'absolute';
+                    navLinks.style.top = '70px';
+                    navLinks.style.right = '30px';
+                    navLinks.style.background = 'rgba(254, 254, 254, 0.98)';
+                    navLinks.style.padding = '20px';
+                    navLinks.style.borderRadius = '4px';
+                    navLinks.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
+                }
+            });
+        }
+
+        // Add hover effect to service cards
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+            });
+        });
+
+    </script>
+</body>
+</html>
