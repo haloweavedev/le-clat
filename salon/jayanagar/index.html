@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Clat Salon - Jayanagar | Luxury Spa & Salon Experience</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #FEFEFE;
+            --text-primary: #1c1c1c;
+            --accent-gold: #C9A980;
+            --accent-blush: #E8D5C4;
+            --accent-ivory: #F5F0EB;
+        }
+
+        body {
+            font-family: "Roboto", sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        [data-reveal] {
+            opacity: 0;
+            transform: translate3d(0, 40px, 0) scale(0.98);
+            filter: blur(12px);
+            transition: opacity 0.9s cubic-bezier(0.215, 0.61, 0.355, 1),
+                        transform 0.9s cubic-bezier(0.215, 0.61, 0.355, 1),
+                        filter 0.9s ease;
+        }
+
+        [data-reveal].is-visible {
+            opacity: 1;
+            transform: translate3d(0, 0, 0) scale(1);
+            filter: blur(0);
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(254, 254, 254, 0);
+            backdrop-filter: blur(10px);
+            transition: all 0.5s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(254, 254, 254, 0.95);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+            padding: 15px 60px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 24px;
+            letter-spacing: 3px;
+            color: var(--text-primary);
+            text-transform: uppercase;
+        }
+
+        .logo img {
+            height: 48px;
+            width: auto;
+            display: block;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links li {
+            position: relative;
+            list-style: none;
+        }
+
+        .nav-links a,
+        .nav-links button {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 300;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            position: relative;
+            transition: color 0.3s ease;
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+        }
+
+        .nav-links a::after,
+        .nav-links button::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent-gold);
+            transition: width 0.4s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links button:hover::after {
+            width: 100%;
+        }
+
+        .nav-dropdown .dropdown-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding-bottom: 6px;
+        }
+
+        .nav-dropdown .dropdown-toggle svg {
+            width: 12px;
+            height: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-dropdown.is-open .dropdown-toggle svg,
+        body.supports-hover .nav-dropdown:hover .dropdown-toggle svg,
+        body.supports-hover .nav-dropdown:focus-within .dropdown-toggle svg {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            min-width: 230px;
+            padding: 16px;
+            border-radius: 14px;
+            background: rgba(254, 254, 254, 0.98);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(-12px);
+            transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+
+        .dropdown-menu::before {
+            content: '';
+            position: absolute;
+            top: -18px;
+            left: 0;
+            width: 100%;
+            height: 18px;
+        }
+
+        body.supports-hover .nav-dropdown:hover .dropdown-menu,
+        body.supports-hover .nav-dropdown:focus-within .dropdown-menu,
+        .nav-dropdown.is-open .dropdown-menu {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        .dropdown-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 30px;
+            font-size: 12px;
+            letter-spacing: 2px;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: background 0.25s ease, padding-left 0.25s ease;
+        }
+
+        .dropdown-link:hover,
+        .dropdown-link:focus {
+            background: rgba(201, 169, 128, 0.12);
+            padding-left: 36px;
+        }
+
+        .book-now-btn {
+            padding: 12px 30px;
+            background: transparent;
+            border: 1px solid var(--text-primary);
+            color: var(--text-primary);
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .book-now-btn:hover {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+        }
+
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(135deg, rgba(245, 240, 235, 0.4) 0%, rgba(232, 213, 196, 0.85) 50%, rgba(28, 28, 28, 0.7) 100%), url('../../images/c7c69bb7-cb36-4e70-ace4-b01fd0de9274.webp');
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            animation: fadeIn 1.5s ease forwards;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+            padding: 0 20px;
+        }
+
+        .hero-subtitle {
+            font-size: 14px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: slideUp 1s ease 0.3s forwards;
+        }
+
+        .hero-title {
+            font-family: "Cormorant Garamond", serif;
+            font-size: 68px;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            opacity: 0;
+            animation: slideUp 1s ease 0.5s forwards;
+        }
+
+        .hero-description {
+            font-size: 17px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            line-height: 1.8;
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: slideUp 1s ease 0.7s forwards;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: slideUp 1s ease 0.9s forwards;
+        }
+
+        .cta-primary, .cta-secondary {
+            padding: 16px 40px;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            border: 1px solid var(--text-primary);
+        }
+
+        .cta-primary {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+        }
+
+        .cta-primary:hover {
+            background: transparent;
+            color: var(--text-primary);
+        }
+
+        .cta-secondary {
+            background: transparent;
+            color: var(--text-primary);
+        }
+
+        .cta-secondary:hover {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px;
+        }
+
+        .section-subtitle {
+            font-size: 13px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            color: var(--accent-gold);
+        }
+
+        .section-title {
+            font-family: "Cormorant Garamond", serif;
+            font-size: 54px;
+            margin-bottom: 16px;
+        }
+
+        .section-description {
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .location-intro,
+        .location-section,
+        .location-info,
+        .contact,
+        .location-cta {
+            padding: 120px 60px;
+        }
+
+        .location-intro {
+            background: var(--accent-ivory);
+        }
+
+        .location-intro p {
+            font-size: 16px;
+            line-height: 1.9;
+            color: #444;
+            margin-bottom: 18px;
+        }
+
+        .location-intro em {
+            font-style: italic;
+            color: var(--accent-gold);
+        }
+
+        .location-section:nth-of-type(even) {
+            background: var(--accent-ivory);
+        }
+
+        .location-service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .location-service-card {
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 18px;
+            padding: 28px;
+            background: #fff;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .location-service-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .service-number {
+            font-size: 14px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+        }
+
+        .location-service-card h3 {
+            font-family: "Cormorant Garamond", serif;
+            font-size: 26px;
+            margin-bottom: 8px;
+        }
+
+        .location-service-card p {
+            font-size: 15px;
+            color: #4a4a4a;
+            line-height: 1.7;
+        }
+
+        .location-info {
+            background: #fff;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+        }
+
+        .info-card {
+            border: 1px solid rgba(0,0,0,0.08);
+            border-radius: 16px;
+            padding: 30px;
+            background: var(--accent-ivory);
+        }
+
+        .info-card h4 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+
+        .info-card p,
+        .info-card a {
+            font-size: 15px;
+            color: #4a4a4a;
+            line-height: 1.8;
+            text-decoration: none;
+        }
+
+        .info-card a {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .info-cta {
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .info-cta p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 16px;
+        }
+
+        .contact {
+            background: var(--accent-ivory);
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            align-items: start;
+        }
+
+        .contact-brand {
+            border: 1px solid #e8e3dc;
+            border-radius: 16px;
+            padding: 40px;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-brand img {
+            max-width: 200px;
+            height: auto;
+        }
+
+        .brand-highlights {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .brand-highlights li {
+            display: flex;
+            gap: 12px;
+            font-size: 14px;
+            color: #444;
+        }
+
+        .brand-highlights li::before {
+            content: '✦';
+            color: var(--accent-gold);
+        }
+
+        .contact-cta {
+            margin-top: 20px;
+        }
+
+        .contact-cta p {
+            font-size: 13px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            color: #777;
+        }
+
+        .contact-cta .contact-cta-btn {
+            padding: 12px 28px;
+            border: 1px solid var(--text-primary);
+            background: transparent;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .contact-cta .contact-cta-btn:hover {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+        }
+
+        .contact-form {
+            border: 1px solid #e8e3dc;
+            border-radius: 16px;
+            padding: 40px;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-label {
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .form-input, .form-select, .form-textarea {
+            padding: 14px;
+            border: 1px solid rgba(0,0,0,0.15);
+            border-radius: 10px;
+            background: #fff;
+            font-size: 14px;
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-submit {
+            padding: 14px 30px;
+            border: none;
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .form-submit:hover {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--text-primary);
+        }
+
+        footer {
+            text-align: center;
+            padding: 80px 60px 40px;
+        }
+
+        .footer-info {
+            font-size: 14px;
+            color: #666;
+            margin: 16px 0;
+        }
+
+        .floating-booking {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 999;
+        }
+
+        .floating-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--accent-gold);
+            color: var(--bg-primary);
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .floating-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .booking-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(7, 7, 7, 0.55);
+            backdrop-filter: blur(18px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+            z-index: 2000;
+        }
+
+        .booking-modal.is-visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .booking-modal__dialog {
+            background: rgba(254, 254, 254, 0.95);
+            border-radius: 24px;
+            padding: 50px;
+            width: min(640px, 100%);
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.25);
+            animation: modalIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .booking-modal__close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            background: transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .booking-modal__title {
+            font-family: "Cormorant Garamond", serif;
+            font-size: 42px;
+            margin-bottom: 12px;
+        }
+
+        .booking-modal__description {
+            font-size: 15px;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .modal-form .form-group {
+            animation: fadeInUp 0.6s ease both;
+        }
+
+        body.modal-open {
+            overflow: hidden;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+        }
+
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .mobile-menu-btn span {
+            width: 25px;
+            height: 2px;
+            background: var(--text-primary);
+        }
+
+        @media (max-width: 1024px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 30px;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .nav-dropdown .dropdown-menu {
+                position: static;
+                opacity: 1;
+                pointer-events: auto;
+                background: transparent;
+                box-shadow: none;
+                padding: 0;
+                transform: none;
+                display: none;
+            }
+
+            .nav-dropdown.is-open .dropdown-menu {
+                display: block;
+                margin-top: 10px;
+            }
+
+            .dropdown-link {
+                padding: 10px 0;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .location-intro,
+            .location-section,
+            .location-info,
+            .contact {
+                padding: 80px 30px;
+            }
+
+            footer {
+                padding: 60px 30px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <div class="logo">
+            <img src="../../images/logo.png" alt="Le Clat logo" loading="lazy">
+        </div>
+        <ul class="nav-links">
+            <li class="nav-item nav-dropdown">
+                <button class="dropdown-toggle" type="button" aria-expanded="false">
+                    Spa
+                    <svg viewBox="0 0 12 8" aria-hidden="true" focusable="false">
+                        <path d="M1 1.5L6 6.5L11 1.5" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-link" href="/spa/jayanagar/">Jayanagar</a></li>
+                    <li><a class="dropdown-link" href="#" data-coming-soon="true">Shantinagar</a></li>
+                    <li><a class="dropdown-link" href="#" data-coming-soon="true">Electronic City</a></li>
+                </ul>
+            </li>
+            <li class="nav-item nav-dropdown">
+                <button class="dropdown-toggle" type="button" aria-expanded="false">
+                    Salon
+                    <svg viewBox="0 0 12 8" aria-hidden="true" focusable="false">
+                        <path d="M1 1.5L6 6.5L11 1.5" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-link" href="/salon/jayanagar/">Jayanagar</a></li>
+                    <li><a class="dropdown-link" href="#" data-coming-soon="true">Shantinagar</a></li>
+                    <li><a class="dropdown-link" href="#" data-coming-soon="true">Electronic City</a></li>
+                </ul>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="#spa-menu">Spa Menu</a></li>
+            <li class="nav-item"><a class="nav-link" href="#salon-menu">Salon Artistry</a></li>
+            <li class="nav-item"><a class="nav-link" href="#visit">Visit</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+        <button class="book-now-btn" type="button" data-open-modal data-modal-context="Navigation Book Now">Book Now</button>
+        <button class="mobile-menu-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <section class="hero" data-reveal-parent>
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <p class="hero-subtitle" data-reveal>Le Clat · Jayanagar</p>
+            <h1 class="hero-title" data-reveal>Where Beauty Meets Serenity</h1>
+            <p class="hero-description" data-reveal>Le Clat Spa & Salon is your sanctuary of rejuvenation — a space crafted to revive your senses, elevate your natural beauty, and offer an experience that blends luxury with deep personal care.</p>
+            <div class="hero-cta" data-reveal>
+                <a href="#contact" class="cta-primary" data-open-modal data-modal-context="Hero CTA">Reserve Your Ritual</a>
+                <a href="#spa-menu" class="cta-secondary">Explore Spa Menu</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="location-intro" data-reveal-parent>
+        <div class="section-header">
+            <p class="section-subtitle" data-reveal>Signature Sanctuary</p>
+            <h2 class="section-title" data-reveal>Le Clat Spa & Salon - Jayanagar</h2>
+            <p class="section-description" data-reveal>Inspired by the elegance of the saffron flower, Le Clat represents purity, warmth, and an inner glow that radiates outward. From indulgent spa therapies to premium salon artistry, every service is delivered with precision, passion, and an unwavering commitment to excellence.</p>
+        </div>
+        <p data-reveal>Step into a world where beauty is unbound — where your well-being, confidence, and comfort take center stage. Our Jayanagar address is thoughtfully designed with private spa suites, couture grooming stations, and a concierge-led experience that anticipates your every need.</p>
+        <p data-reveal><em>Every ritual at Le Clat is personal, purposeful, and profoundly luxurious.</em></p>
+    </section>
+
+    <section class="location-section" id="spa-menu" data-reveal-parent>
+        <div class="section-header">
+            <p class="section-subtitle" data-reveal>Spa Menu</p>
+            <h2 class="section-title" data-reveal>Therapeutic Rituals</h2>
+            <p class="section-description" data-reveal>Experience curated body therapies, massage rituals, and healing touch techniques designed to restore balance from within.</p>
+        </div>
+        <div class="location-service-grid">
+            <div class="location-service-card" data-reveal>
+                <span class="service-number">01</span>
+                <div>
+                    <h3>Deep Tissue Treatments</h3>
+                    <p>Therapeutic massage targeting deep muscle layers to release chronic tension, stiffness, and post-workout fatigue.</p>
+                </div>
+            </div>
+            <div class="location-service-card" data-reveal>
+                <span class="service-number">02</span>
+                <div>
+                    <h3>Aromatherapy Treatments</h3>
+                    <p>Sensory massages with curated essential oils that calm the mind, balance the body, and elevate emotional well-being.</p>
+                </div>
+            </div>
+            <div class="location-service-card" data-reveal>
+                <span class="service-number">03</span>
+                <div>
+                    <h3>Balinese Treatments</h3>
+                    <p>Traditional Indonesian therapy blending stretching, pressure points, and aromatics to restore energy and deep harmony.</p>
+                </div>
+            </div>
+            <div class="location-service-card" data-reveal>
+                <span class="service-number">04</span>
+                <div>
+                    <h3>Bamboo Treatments</h3>
+                    <p>Warm bamboo sticks knead and roll out tight muscles, improving circulation while relieving persistent tension.</p>
+                </div>
+            </div>
+            <div class="location-service-card" data-reveal>
+                <span class="service-number">05</span>
+                <div>
+                    <h3>Swedish Treatments</h3>
+                    <p>Classic full-body massage with long, flowing strokes that enhance blood flow and melt everyday stress.</p>
+                </div>
+            </div>
+            <div class="location-service-card" data-reveal>
+                <span class="service-number">06</span>
+                <div>
+                    <h3>Athletic Body Massage</h3>
+                    <p>Designed for active individuals to improve flexibility, reduce muscle fatigue, and enhance performance.</p>
+                </div>
+            </div>
+            <div class="location-service-card" data-reveal>
+                <span class="service-number">07</span>
+                <div>
+                    <h3>Hot Stone Massage</h3>
+                    <p>Warm volcanic stones melt away stress, soothe muscle stiffness, and promote deep relaxation throughout the body.</p>
+                </div>
+            </div>
+            <div class="location-service-card" data-reveal>
+                <span class="service-number">08</span>
+                <div>
+                    <h3>Le Clat Signature</h3>
+                    <p>A luxurious blend of customised techniques tailored to your body’s needs for a one-of-a-kind spa experience.</p>
+                </div>
+            </div>
+            <div class="location-service-card" data-reveal>
+                <span class="service-number">09</span>
+                <div>
+                    <h3>Neck, Back & Shoulder Massage</h3>
+                    <p>Focused relief for tension-prone areas, releasing stress from desk work, travel, and everyday posture strain.</p>
+                </div>
+            </div>
+            <div class="location-service-card" data-reveal>
+                <span class="service-number">10</span>
+                <div>
+                    <h3>Foot Massage</h3>
+                    <p>Smoothing lower-leg and foot therapy that revives tired feet, eases fatigue, and enhances overall relaxation.</p>
+                </div>
+            </div>
+            <div class="location-service-card" data-reveal>
+                <span class="service-number">11</span>
+                <div>
+                    <h3>Head Massage</h3>
+                    <p>Gentle scalp stimulation that reduces stress and mental fatigue while improving clarity and circulation.</p>
+                </div>
+            </div>
+            <div class="location-service-card" data-reveal>
+                <span class="service-number">12</span>
+                <div>
+                    <h3>Foot Reflexology</h3>
+                    <p>Targeted pressure on reflex points to balance internal organs, promoting healing, relaxation, and wellness.</p>
+                </div>
+            </div>
+            <div class="location-service-card" data-reveal>
+                <span class="service-number">13</span>
+                <div>
+                    <h3>Zone Therapy</h3>
+                    <p>Focused work on specific body zones to release blockages and treat discomfort linked to energy imbalance.</p>
+                </div>
+            </div>
+            <div class="location-service-card" data-reveal>
+                <span class="service-number">14</span>
+                <div>
+                    <h3>Body Polishing</h3>
+                    <p>Full-body exfoliation using luxurious blends that remove dead cells, revealing skin that is smooth and luminous.</p>
+                </div>
+            </div>
+            <div class="location-service-card" data-reveal>
+                <span class="service-number">15</span>
+                <div>
+                    <h3>Body Wraps</h3>
+                    <p>Nourishing wraps infused with minerals and botanicals to hydrate, detoxify, and tone the skin.</p>
+                </div>
+            </div>
+            <div class="location-service-card" data-reveal>
+                <span class="service-number">16</span>
+                <div>
+                    <h3>Pregnancy Massage</h3>
+                    <p>A gentle, safe treatment for expectant mothers to relieve back pain, swelling, and promote deep comfort.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="location-section" id="salon-menu" data-reveal-parent>
+        <div class="section-header">
+            <p class="section-subtitle" data-reveal>Salon Couture</p>
+            <h2 class="section-title" data-reveal>Beauty Atelier</h2>
+            <p class="section-description" data-reveal>Our premium salon offers couture grooming, advanced hair artistry, and modern beauty rituals tailored to your style.</p>
+        </div>
+        <div class="location-service-grid">
+            <div class="location-service-card" data-reveal><span class="service-number">01</span><div><h3>Men Grooming</h3><p>Complete grooming solutions including hair, beard, and skincare for a sharp, polished look.</p></div></div>
+            <div class="location-service-card" data-reveal><span class="service-number">02</span><div><h3>Hair Colour (Women)</h3><p>Professional colouring services for vibrant tones or subtle shades that enhance your style.</p></div></div>
+            <div class="location-service-card" data-reveal><span class="service-number">03</span><div><h3>Women Grooming</h3><p>Curated beauty essentials tailored for modern women with impeccable attention to detail.</p></div></div>
+            <div class="location-service-card" data-reveal><span class="service-number">04</span><div><h3>Hair Treatment</h3><p>Targeted rituals to repair, hydrate, and strengthen hair for renewed shine and softness.</p></div></div>
+            <div class="location-service-card" data-reveal><span class="service-number">05</span><div><h3>Wash & Blow-Dry</h3><p>Cleanse and finish with a smooth, stylish blow-dry ideal for everyday polish or special events.</p></div></div>
+            <div class="location-service-card" data-reveal><span class="service-number">06</span><div><h3>Advanced Hair Repair</h3><p>Fiber Clinic, Olaplex, and other restorative rituals that rebuild damaged strands from within.</p></div></div>
+            <div class="location-service-card" data-reveal><span class="service-number">07</span><div><h3>Styling (Men & Women)</h3><p>Custom styling for sleek, voluminous, textured, or trend-forward looks with expert finishing.</p></div></div>
+            <div class="location-service-card" data-reveal><span class="service-number">08</span><div><h3>Hair Spa</h3><p>Rejuvenating scalp and hair therapy that nourishes from root to tip while easing stress.</p></div></div>
+            <div class="location-service-card" data-reveal><span class="service-number">09</span><div><h3>Colour Services (Men)</h3><p>Natural or fashion-forward colour crafted for men’s style preferences with refined impact.</p></div></div>
+            <div class="location-service-card" data-reveal><span class="service-number">10</span><div><h3>Bleach</h3><p>Precision lightening services for brighter tones, highlights, or bold transformations.</p></div></div>
+            <div class="location-service-card" data-reveal><span class="service-number">11</span><div><h3>TAN Treatment</h3><p>Specialised formulas to remove tan and brighten the skin, restoring an even glow.</p></div></div>
+            <div class="location-service-card" data-reveal><span class="service-number">12</span><div><h3>Facials</h3><p>Skin-boosting treatments tailored to hydrate, detox, and leave the complexion radiant.</p></div></div>
+            <div class="location-service-card" data-reveal><span class="service-number">13</span><div><h3>Waxing</h3><p>Gentle, precise hair removal for smooth, soft skin with long-lasting results.</p></div></div>
+            <div class="location-service-card" data-reveal><span class="service-number">14</span><div><h3>Threading</h3><p>Expert brow and facial threading for clean lines and natural definition.</p></div></div>
+            <div class="location-service-card" data-reveal><span class="service-number">15</span><div><h3>Nails</h3><p>Professional nail care including trimming, shaping, polishing, and nourishing rituals.</p></div></div>
+            <div class="location-service-card" data-reveal><span class="service-number">16</span><div><h3>Manicure & Pedicure</h3><p>Hand and foot pampering that cleanses, exfoliates, hydrates, and perfects.</p></div></div>
+            <div class="location-service-card" data-reveal><span class="service-number">17</span><div><h3>Acrylic Extension & Art</h3><p>Durable acrylic extensions customised to your length and finished with creative nail art.</p></div></div>
+            <div class="location-service-card" data-reveal><span class="service-number">18</span><div><h3>Gel Extension & Art</h3><p>Lightweight gel extensions offering a natural, long-lasting look with elegant or bold designs.</p></div></div>
+        </div>
+    </section>
+
+    <section class="location-info" id="visit" data-reveal-parent>
+        <div class="section-header">
+            <p class="section-subtitle" data-reveal>Plan Your Visit</p>
+            <h2 class="section-title" data-reveal>Le Clat Jayanagar</h2>
+            <p class="section-description" data-reveal>2nd Floor, B&B Opulent Spire Building, Jayanagar 9th Block, Bangalore – 560029</p>
+        </div>
+        <div class="info-grid">
+            <div class="info-card" data-reveal>
+                <h4>Google My Business</h4>
+                <a href="https://share.google/Vl7qTlfyC3ULG9g11" target="_blank" rel="noopener">Explore Location →</a>
+            </div>
+            <div class="info-card" data-reveal>
+                <h4>Call Concierge</h4>
+                <a href="tel:+919900085245">+91 99000 85245</a>
+            </div>
+            <div class="info-card" data-reveal>
+                <h4>Luxury Highlights</h4>
+                <p>Private spa pods, curated aroma bar, bridal preparation lounge, and couture grooming suites.</p>
+            </div>
+        </div>
+        <div class="info-cta" data-reveal>
+            <p>Ready to book your bespoke spa or salon experience?</p>
+            <button class="book-now-btn" type="button" data-open-modal data-modal-context="Visit CTA">Launch Booking Suite</button>
+        </div>
+    </section>
+
+    <section class="contact" id="contact" data-reveal-parent>
+        <div class="section-header">
+            <p class="section-subtitle" data-reveal>Concierge Desk</p>
+            <h2 class="section-title" data-reveal>Reserve Your Appointment</h2>
+            <p class="section-description" data-reveal>Share your details and our team will curate the ideal spa or salon journey for you at Le Clat Jayanagar.</p>
+        </div>
+        <div class="contact-container">
+            <div class="contact-brand" data-reveal>
+                <img src="../../images/logo.jpeg" alt="Le Clat crest" loading="lazy">
+                <p>Every ritual at Le Clat is crafted by therapists, aestheticians, and stylists who tailor techniques to your mood, occasion, and desired outcome.</p>
+                <ul class="brand-highlights">
+                    <li>Bespoke spa therapies & premium salon artistry</li>
+                    <li>Dedicated bridal & grooming lounge</li>
+                    <li>Concierge-led experience with curated add-ons</li>
+                </ul>
+                <div class="contact-cta">
+                    <p>Prefer our floating booking suite?</p>
+                    <button type="button" class="contact-cta-btn" data-open-modal data-modal-context="Contact Panel CTA">Open Pop-Up Form</button>
+                </div>
+            </div>
+            <form class="contact-form booking-form" data-reveal>
+                <input type="hidden" name="form_origin" value="Jayanagar Location Page">
+                <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" class="form-input" name="user_name" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Phone Number</label>
+                    <input type="tel" class="form-input" name="user_phone" placeholder="+91 00000 00000" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" class="form-input" name="user_email" placeholder="you@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Service Interested</label>
+                    <select class="form-select" name="service_interest" required>
+                        <option value="">Select a service</option>
+                        <option value="spa">Spa</option>
+                        <option value="salon">Salon</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Preferred Date & Time</label>
+                    <input type="datetime-local" class="form-input" name="preferred_datetime" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Special Requests / Notes</label>
+                    <textarea class="form-textarea" name="special_requests" placeholder="Any specific requirements..."></textarea>
+                </div>
+                <button type="submit" class="form-submit">Confirm Booking</button>
+            </form>
+        </div>
+    </section>
+
+    <div class="booking-modal" id="bookingModal" aria-hidden="true">
+        <div class="booking-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle" tabindex="-1">
+            <button class="booking-modal__close" type="button" data-close-modal aria-label="Close booking form">&times;</button>
+            <p class="booking-modal__title" id="bookingModalTitle">Reserve Your Ritual</p>
+            <p class="booking-modal__description">Share your preference and our concierge team will reach out to curate your spa or salon journey at Le Clat.</p>
+            <form class="contact-form modal-form booking-form" id="modalBookingForm">
+                <input type="hidden" name="form_origin" value="Jayanagar Modal">
+                <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" class="form-input" name="user_name" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Phone Number</label>
+                    <input type="tel" class="form-input" name="user_phone" placeholder="+91 00000 00000" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" class="form-input" name="user_email" placeholder="you@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Service Interested</label>
+                    <select class="form-select" name="service_interest" required>
+                        <option value="">Select a service</option>
+                        <option value="spa">Spa</option>
+                        <option value="salon">Salon</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Preferred Date & Time</label>
+                    <input type="datetime-local" class="form-input" name="preferred_datetime" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Special Requests / Notes</label>
+                    <textarea class="form-textarea" name="special_requests" placeholder="Any specific requirements..."></textarea>
+                </div>
+                <button type="submit" class="form-submit">Send Booking Request</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <img src="../../images/logo.png" alt="Le Clat insignia" loading="lazy" style="height:60px;">
+        <p class="footer-info">Le Clat Spa & Salon · Jayanagar<br>2nd Floor, B&B Opulent Spire Building, Jayanagar 9th Block, Bangalore – 560029<br>info@leclat.com | +91 99000 85245</p>
+    </footer>
+
+    <div class="floating-booking">
+        <button class="floating-btn" type="button" data-open-modal data-modal-context="Floating CTA">✦</button>
+    </div>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
+        const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID';
+        const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
+
+        const navbar = document.getElementById('navbar');
+        const heroContent = document.querySelector('.hero-content');
+        const bookingModal = document.getElementById('bookingModal');
+        const modalDialog = bookingModal ? bookingModal.querySelector('.booking-modal__dialog') : null;
+        let lenisInstance = null;
+        let lastFocusedElement = null;
+
+        const hasEmailJsLibrary = typeof emailjs !== 'undefined';
+        const canUseEmailJs = hasEmailJsLibrary &&
+            EMAILJS_PUBLIC_KEY && !EMAILJS_PUBLIC_KEY.includes('YOUR_PUBLIC_KEY') &&
+            EMAILJS_SERVICE_ID && !EMAILJS_SERVICE_ID.includes('YOUR_SERVICE_ID') &&
+            EMAILJS_TEMPLATE_ID && !EMAILJS_TEMPLATE_ID.includes('YOUR_TEMPLATE_ID');
+
+        if (canUseEmailJs) {
+            emailjs.init({
+                publicKey: EMAILJS_PUBLIC_KEY,
+                blockHeadless: true,
+                limitRate: {
+                    throttle: 1500
+                }
+            });
+        }
+
+        const handleScrollEffects = (scrollY) => {
+            if (navbar) {
+                if (scrollY > 100) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            }
+
+            if (heroContent) {
+                const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+                if (scrollY < viewportHeight) {
+                    const progress = scrollY / viewportHeight;
+                    heroContent.style.transform = `translateY(${progress * 80}px)`;
+                    heroContent.style.opacity = Math.max(0, 1 - progress * 0.85).toString();
+                } else {
+                    heroContent.style.transform = 'translateY(0)';
+                    heroContent.style.opacity = '0';
+                }
+            }
+        };
+
+        const scrollToTarget = (targetCandidate) => {
+            const target = typeof targetCandidate === 'string' ? document.querySelector(targetCandidate) : targetCandidate;
+            if (!target) return;
+
+            if (lenisInstance) {
+                lenisInstance.scrollTo(target, {
+                    duration: 1.2,
+                    easing: (t) => 1 - Math.pow(1 - t, 3)
+                });
+            } else {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        };
+
+        if (typeof Lenis !== 'undefined') {
+            lenisInstance = new Lenis({
+                autoRaf: true,
+                smoothWheel: true,
+                smoothTouch: false,
+                lerp: 0.08
+            });
+
+            lenisInstance.on('scroll', ({ scroll }) => handleScrollEffects(scroll));
+            handleScrollEffects(window.scrollY || window.pageYOffset);
+        } else {
+            window.addEventListener('scroll', () => handleScrollEffects(window.scrollY || window.pageYOffset));
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            if (anchor.hasAttribute('data-open-modal') || anchor.dataset.comingSoon === 'true') return;
+
+            anchor.addEventListener('click', (e) => {
+                const targetId = anchor.getAttribute('href');
+                if (!targetId || targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (!targetElement) return;
+
+                e.preventDefault();
+                scrollToTarget(targetElement);
+            });
+        });
+
+        document.querySelectorAll('[data-coming-soon]').forEach(link => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                alert('This Le Clat location is launching soon. Stay tuned!');
+            });
+        });
+
+        const setModalContext = (context = '') => {
+            if (!bookingModal) return;
+            const originField = bookingModal.querySelector('input[name="form_origin"]');
+            if (originField) {
+                originField.value = context ? `Booking Modal - ${context}` : 'Booking Modal';
+            }
+        };
+
+        const closeModal = () => {
+            if (!bookingModal) return;
+            bookingModal.classList.remove('is-visible');
+            bookingModal.setAttribute('aria-hidden', 'true');
+            document.body.classList.remove('modal-open');
+            if (lastFocusedElement) {
+                lastFocusedElement.focus({ preventScroll: true });
+                lastFocusedElement = null;
+            }
+        };
+
+        const openModal = (context = '') => {
+            if (!bookingModal) return;
+            lastFocusedElement = document.activeElement;
+            setModalContext(context);
+            bookingModal.classList.add('is-visible');
+            bookingModal.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('modal-open');
+            requestAnimationFrame(() => modalDialog && modalDialog.focus({ preventScroll: true }));
+        };
+
+        document.querySelectorAll('[data-open-modal]').forEach(trigger => {
+            trigger.addEventListener('click', (event) => {
+                event.preventDefault();
+                const context = trigger.dataset.modalContext || '';
+                openModal(context);
+            });
+        });
+
+        document.querySelectorAll('[data-close-modal]').forEach(btn => btn.addEventListener('click', closeModal));
+
+        if (bookingModal) {
+            bookingModal.addEventListener('click', (event) => {
+                if (event.target === bookingModal) {
+                    closeModal();
+                }
+            });
+
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape' && bookingModal.classList.contains('is-visible')) {
+                    closeModal();
+                }
+            });
+        }
+
+        const handleFormSubmit = (event) => {
+            event.preventDefault();
+            const form = event.target;
+            const submitButton = form.querySelector('.form-submit');
+            const originalLabel = submitButton ? submitButton.textContent : '';
+
+            if (submitButton) {
+                submitButton.disabled = true;
+                submitButton.textContent = 'Sending...';
+            }
+
+            const finalize = () => {
+                if (submitButton) {
+                    submitButton.disabled = false;
+                    submitButton.textContent = originalLabel;
+                }
+            };
+
+            const onSuccess = () => {
+                alert('Thank you for your booking request! We will contact you shortly.');
+                form.reset();
+                finalize();
+                if (form.closest('.booking-modal')) {
+                    closeModal();
+                }
+            };
+
+            if (!canUseEmailJs) {
+                onSuccess();
+                return;
+            }
+
+            emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, form)
+                .then(onSuccess)
+                .catch(() => {
+                    alert('We could not submit your request right now. Please try again shortly.');
+                    finalize();
+                });
+        };
+
+        document.querySelectorAll('.booking-form').forEach(form => {
+            form.addEventListener('submit', handleFormSubmit);
+        });
+
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.2,
+            rootMargin: '0px 0px -10% 0px'
+        });
+
+        document.querySelectorAll('[data-reveal]').forEach((el, index) => {
+            const delay = el.dataset.revealDelay || `${Math.min(index * 0.05, 0.45)}s`;
+            el.style.setProperty('--reveal-delay', delay);
+            revealObserver.observe(el);
+        });
+
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', function() {
+                const navLinks = document.querySelector('.nav-links');
+                const spans = this.querySelectorAll('span');
+                
+                if (navLinks.style.display === 'flex') {
+                    navLinks.style.display = 'none';
+                    spans.forEach(span => span.style.transform = 'none');
+                } else {
+                    navLinks.style.display = 'flex';
+                    navLinks.style.flexDirection = 'column';
+                    navLinks.style.position = 'absolute';
+                    navLinks.style.top = '70px';
+                    navLinks.style.right = '30px';
+                    navLinks.style.background = 'rgba(254, 254, 254, 0.98)';
+                    navLinks.style.padding = '20px';
+                    navLinks.style.borderRadius = '4px';
+                    navLinks.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
+                }
+            });
+        }
+
+        const navDropdowns = document.querySelectorAll('.nav-dropdown');
+        const closeAllDropdowns = (exception = null) => {
+            navDropdowns.forEach(dropdown => {
+                if (dropdown === exception) return;
+                if (dropdown.classList.contains('is-open')) {
+                    dropdown.classList.remove('is-open');
+                    const toggle = dropdown.querySelector('.dropdown-toggle');
+                    if (toggle) toggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        };
+
+        const hoverMediaQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
+        const syncHoverClass = () => {
+            document.body.classList.toggle('supports-hover', hoverMediaQuery.matches);
+        };
+        syncHoverClass();
+        if (hoverMediaQuery.addEventListener) {
+            hoverMediaQuery.addEventListener('change', () => {
+                syncHoverClass();
+                closeAllDropdowns();
+            });
+        } else if (hoverMediaQuery.addListener) {
+            hoverMediaQuery.addListener(() => {
+                syncHoverClass();
+                closeAllDropdowns();
+            });
+        }
+
+        navDropdowns.forEach(dropdown => {
+            const toggle = dropdown.querySelector('.dropdown-toggle');
+            if (!toggle) return;
+            toggle.addEventListener('click', (event) => {
+                event.preventDefault();
+                const isOpen = dropdown.classList.contains('is-open');
+                closeAllDropdowns(dropdown);
+                dropdown.classList.toggle('is-open', !isOpen);
+                toggle.setAttribute('aria-expanded', String(!isOpen));
+            });
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!event.target.closest('.nav-dropdown')) {
+                closeAllDropdowns();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -133,9 +133,16 @@
             display: flex;
             gap: 40px;
             list-style: none;
+            align-items: center;
         }
 
-        .nav-links a {
+        .nav-links li {
+            position: relative;
+            list-style: none;
+        }
+
+        .nav-links a,
+        .nav-links button {
             color: var(--text-primary);
             text-decoration: none;
             font-size: 13px;
@@ -144,9 +151,14 @@
             text-transform: uppercase;
             position: relative;
             transition: color 0.3s ease;
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
         }
 
-        .nav-links a::after {
+        .nav-links a::after,
+        .nav-links button::after {
             content: '';
             position: absolute;
             bottom: -5px;
@@ -157,8 +169,82 @@
             transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .nav-links a:hover::after {
+        .nav-links a:hover::after,
+        .nav-links button:hover::after {
             width: 100%;
+        }
+
+        .nav-dropdown .dropdown-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding-bottom: 6px;
+        }
+
+        .nav-dropdown .dropdown-toggle svg {
+            width: 12px;
+            height: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-dropdown.is-open .dropdown-toggle svg,
+        body.supports-hover .nav-dropdown:hover .dropdown-toggle svg,
+        body.supports-hover .nav-dropdown:focus-within .dropdown-toggle svg {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            min-width: 230px;
+            padding: 16px;
+            border-radius: 14px;
+            background: rgba(254, 254, 254, 0.98);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(-12px);
+            transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+
+        .dropdown-menu::before {
+            content: '';
+            position: absolute;
+            top: -18px;
+            left: 0;
+            width: 100%;
+            height: 18px;
+        }
+
+        body.supports-hover .nav-dropdown:hover .dropdown-menu,
+        body.supports-hover .nav-dropdown:focus-within .dropdown-menu,
+        .nav-dropdown.is-open .dropdown-menu {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu li {
+            list-style: none;
+        }
+
+        .dropdown-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 30px;
+            font-size: 12px;
+            letter-spacing: 2px;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: background 0.25s ease, padding-left 0.25s ease;
+        }
+
+        .dropdown-link:hover,
+        .dropdown-link:focus {
+            background: rgba(201, 169, 128, 0.12);
+            padding-left: 36px;
         }
 
         .book-now-btn {
@@ -176,6 +262,101 @@
         .book-now-btn:hover {
             background: var(--text-primary);
             color: var(--bg-primary);
+        }
+
+        /* Booking Modal */
+        .booking-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(7, 7, 7, 0.55);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+            z-index: 2000;
+        }
+
+        .booking-modal.is-visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .booking-modal__dialog {
+            background: rgba(254, 254, 254, 0.95);
+            border-radius: 24px;
+            padding: 50px;
+            width: min(640px, 100%);
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.25);
+            animation: modalIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .booking-modal__dialog:focus {
+            outline: none;
+        }
+
+        .booking-modal__close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            background: transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+        }
+
+        .booking-modal__close:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .booking-modal__title {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .booking-modal__description {
+            font-size: 15px;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .modal-form .form-group {
+            opacity: 1;
+            animation: fadeInUp 0.6s ease both;
+        }
+
+        .modal-form .form-group:nth-child(2) { animation-delay: 0.05s; }
+        .modal-form .form-group:nth-child(3) { animation-delay: 0.1s; }
+        .modal-form .form-group:nth-child(4) { animation-delay: 0.15s; }
+        .modal-form .form-group:nth-child(5) { animation-delay: 0.2s; }
+        .modal-form .form-group:nth-child(6) { animation-delay: 0.25s; }
+
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        body.modal-open {
+            overflow: hidden;
         }
 
         /* Hero Section */
@@ -889,6 +1070,35 @@
             font-size: 12px;
         }
 
+        .contact-cta {
+            margin-top: 20px;
+        }
+
+        .contact-cta p {
+            font-size: 13px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            color: #777;
+        }
+
+        .contact-cta .contact-cta-btn {
+            padding: 12px 28px;
+            border: 1px solid var(--text-primary);
+            background: transparent;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .contact-cta .contact-cta-btn:hover {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+        }
+
         .brand-badge {
             display: inline-flex;
             align-items: center;
@@ -1133,6 +1343,28 @@
 
             .nav-links {
                 display: none;
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .nav-dropdown .dropdown-menu {
+                position: static;
+                opacity: 1;
+                pointer-events: auto;
+                background: transparent;
+                box-shadow: none;
+                padding: 0;
+                transform: none;
+                display: none;
+            }
+
+            .nav-dropdown.is-open .dropdown-menu {
+                display: block;
+                margin-top: 10px;
+            }
+
+            .dropdown-link {
+                padding: 10px 0;
             }
 
             .mobile-menu-btn {
@@ -1164,13 +1396,37 @@
             <img src="images/logo.png" alt="Le Clat logo mark" loading="lazy">
         </div>
         <ul class="nav-links">
-            <li><a href="#spa">Spa</a></li>
-            <li><a href="#salon">Salon</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#franchise">Franchise</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li class="nav-item nav-dropdown">
+                <button class="dropdown-toggle" type="button" aria-expanded="false">
+                    Spa
+                    <svg viewBox="0 0 12 8" aria-hidden="true" focusable="false">
+                        <path d="M1 1.5L6 6.5L11 1.5" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-link" href="/spa/jayanagar/">Jayanagar</a></li>
+                    <li><a class="dropdown-link" href="#" data-coming-soon="true">Shantinagar</a></li>
+                    <li><a class="dropdown-link" href="#" data-coming-soon="true">Electronic City</a></li>
+                </ul>
+            </li>
+            <li class="nav-item nav-dropdown">
+                <button class="dropdown-toggle" type="button" aria-expanded="false">
+                    Salon
+                    <svg viewBox="0 0 12 8" aria-hidden="true" focusable="false">
+                        <path d="M1 1.5L6 6.5L11 1.5" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-link" href="/salon/jayanagar/">Jayanagar</a></li>
+                    <li><a class="dropdown-link" href="#" data-coming-soon="true">Shantinagar</a></li>
+                    <li><a class="dropdown-link" href="#" data-coming-soon="true">Electronic City</a></li>
+                </ul>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="#franchise">Franchise</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
         </ul>
-        <button class="book-now-btn" type="button" data-scroll-target="#contact">Book Now</button>
+        <button class="book-now-btn" type="button" data-open-modal data-modal-context="Navigation Book Now">Book Now</button>
         <button class="mobile-menu-btn">
             <span></span>
             <span></span>
@@ -1186,7 +1442,7 @@
             <h1 class="hero-title cormorant-light" data-reveal data-reveal-delay="0.1s">Redefining Beauty,<br>Wellness & Skincare</h1>
             <p class="hero-description" data-reveal data-reveal-delay="0.2s">Luxury meets advanced science at Le Clat – your destination for flawless skin, rejuvenation therapies, and premium salon services.</p>
             <div class="hero-cta" data-reveal data-reveal-delay="0.3s">
-                <a href="#contact" class="cta-primary">Book Your Appointment</a>
+                <a href="#contact" class="cta-primary" data-open-modal data-modal-context="Hero CTA">Book Your Appointment</a>
                 <a href="#services" class="cta-secondary">Explore Services</a>
             </div>
         </div>
@@ -1199,7 +1455,7 @@
         <p data-reveal data-reveal-delay="0.2s">Whether you’re looking to rejuvenate your skin, relax your body, transform your look, or prepare for your big day, Le Clat is here to make it happen.</p>
         <p data-reveal data-reveal-delay="0.25s"><em>Experience the most trusted skin clinic, spa & salon in Bangalore today.</em></p>
         <div class="cta-row" data-reveal data-reveal-delay="0.3s">
-            <a href="#contact" class="cta-primary">Book Your Appointment</a>
+            <a href="#contact" class="cta-primary" data-open-modal data-modal-context="Brand Story CTA">Book Your Appointment</a>
             <a href="#services" class="cta-secondary">View Services</a>
         </div>
     </section>
@@ -1264,7 +1520,7 @@
                         <span>Therapeutic Essential Oils & Organic Products</span>
                         <span>Ideal for Stress Relief & Wellness</span>
                     </div>
-                    <a href="#contact" class="service-link">Book a Spa Session →</a>
+                    <a href="#contact" class="service-link" data-open-modal data-modal-context="Spa Service Card">Book a Spa Session →</a>
                 </div>
             </div>
             <div class="service-card" id="salon" data-reveal data-reveal-delay="0.2s">
@@ -1300,7 +1556,7 @@
                         <span>Customized Packages for Every Occasion</span>
                         <span>Bridal Lounge & Premium Grooming</span>
                     </div>
-                    <a href="#contact" class="service-link">Book a Salon Appointment →</a>
+                    <a href="#contact" class="service-link" data-open-modal data-modal-context="Salon Service Card">Book a Salon Appointment →</a>
                 </div>
             </div>
         </div>
@@ -1450,7 +1706,7 @@
         </div>
         <p class="franchise-cta" data-reveal data-reveal-delay="0.34s">Ready to elevate wellness in your city? Apply for a franchise.</p>
         <div style="text-align: center; margin-top: 40px;" data-reveal data-reveal-delay="0.35s">
-            <a href="#contact" class="cta-primary">Apply for Franchise</a>
+            <a href="#contact" class="cta-primary" data-open-modal data-modal-context="Franchise CTA">Apply for Franchise</a>
         </div>
     </section>
 
@@ -1470,41 +1726,86 @@
                     <li>International product selection</li>
                     <li>Private bridal preparation lounge</li>
                 </ul>
+                <div class="contact-cta">
+                    <p>Prefer a private concierge experience?</p>
+                    <button type="button" class="contact-cta-btn" data-open-modal data-modal-context="Contact Panel CTA">Launch Booking Form</button>
+                </div>
             </div>
-            <form class="contact-form" data-reveal data-reveal-delay="0.3s">
+            <form class="contact-form booking-form" data-reveal data-reveal-delay="0.3s">
+                <input type="hidden" name="form_origin" value="Main Page Contact">
                 <div class="form-group">
                     <label class="form-label">Full Name</label>
-                    <input type="text" class="form-input" placeholder="Enter your name" required>
+                    <input type="text" class="form-input" name="user_name" placeholder="Enter your name" required>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Phone Number</label>
-                    <input type="tel" class="form-input" placeholder="+91 00000 00000" required>
+                    <input type="tel" class="form-input" name="user_phone" placeholder="+91 00000 00000" required>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Email Address</label>
-                    <input type="email" class="form-input" placeholder="you@example.com" required>
+                    <input type="email" class="form-input" name="user_email" placeholder="you@example.com" required>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Service Interested</label>
-                    <select class="form-select" required>
+                    <select class="form-select" name="service_interest" required>
                         <option value="">Select a service</option>
-                        <option value="skin-clinic">Skin Clinic</option>
                         <option value="spa">Spa</option>
                         <option value="salon">Salon</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Preferred Date & Time</label>
-                    <input type="datetime-local" class="form-input" required>
+                    <input type="datetime-local" class="form-input" name="preferred_datetime" required>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Special Requests / Notes</label>
-                    <textarea class="form-textarea" placeholder="Any specific requirements..."></textarea>
+                    <textarea class="form-textarea" name="special_requests" placeholder="Any specific requirements..."></textarea>
                 </div>
                 <button type="submit" class="form-submit">Confirm Booking</button>
             </form>
         </div>
     </section>
+
+    <!-- Booking Modal -->
+    <div class="booking-modal" id="bookingModal" aria-hidden="true">
+        <div class="booking-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle" tabindex="-1">
+            <button class="booking-modal__close" type="button" data-close-modal aria-label="Close booking form">&times;</button>
+            <p class="booking-modal__title cormorant-light" id="bookingModalTitle">Reserve Your Ritual</p>
+            <p class="booking-modal__description">Share your preference and our concierge team will reach out to curate your spa or salon journey at Le Clat.</p>
+            <form class="contact-form modal-form booking-form" id="modalBookingForm">
+                <input type="hidden" name="form_origin" value="Booking Modal">
+                <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" class="form-input" name="user_name" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Phone Number</label>
+                    <input type="tel" class="form-input" name="user_phone" placeholder="+91 00000 00000" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" class="form-input" name="user_email" placeholder="you@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Service Interested</label>
+                    <select class="form-select" name="service_interest" required>
+                        <option value="">Select a service</option>
+                        <option value="spa">Spa</option>
+                        <option value="salon">Salon</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Preferred Date & Time</label>
+                    <input type="datetime-local" class="form-input" name="preferred_datetime" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Special Requests / Notes</label>
+                    <textarea class="form-textarea" name="special_requests" placeholder="Any specific requirements..."></textarea>
+                </div>
+                <button type="submit" class="form-submit">Send Booking Request</button>
+            </form>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer data-reveal-parent>
@@ -1529,13 +1830,37 @@
 
     <!-- Floating Booking Widget -->
     <div class="floating-booking" data-reveal-parent>
-        <button class="floating-btn" type="button" data-scroll-target="#contact" data-reveal data-reveal-delay="0s">✦</button>
+        <button class="floating-btn" type="button" data-open-modal data-modal-context="Floating CTA" data-reveal data-reveal-delay="0s">✦</button>
     </div>
 
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script>
+        const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
+        const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID';
+        const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
+
         const navbar = document.getElementById('navbar');
         const heroContent = document.querySelector('.hero-content');
+        const bookingModal = document.getElementById('bookingModal');
+        const modalDialog = bookingModal ? bookingModal.querySelector('.booking-modal__dialog') : null;
         let lenisInstance = null;
+        let lastFocusedElement = null;
+
+        const hasEmailJsLibrary = typeof emailjs !== 'undefined';
+        const canUseEmailJs = hasEmailJsLibrary &&
+            EMAILJS_PUBLIC_KEY && !EMAILJS_PUBLIC_KEY.includes('YOUR_PUBLIC_KEY') &&
+            EMAILJS_SERVICE_ID && !EMAILJS_SERVICE_ID.includes('YOUR_SERVICE_ID') &&
+            EMAILJS_TEMPLATE_ID && !EMAILJS_TEMPLATE_ID.includes('YOUR_TEMPLATE_ID');
+
+        if (canUseEmailJs) {
+            emailjs.init({
+                publicKey: EMAILJS_PUBLIC_KEY,
+                blockHeadless: true,
+                limitRate: {
+                    throttle: 1500
+                }
+            });
+        }
 
         const handleScrollEffects = (scrollY) => {
             if (navbar) {
@@ -1587,8 +1912,9 @@
             window.addEventListener('scroll', () => handleScrollEffects(window.scrollY || window.pageYOffset));
         }
 
-        // Smooth scroll for navigation links + CTAs
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            if (anchor.hasAttribute('data-open-modal') || anchor.dataset.comingSoon === 'true') return;
+
             anchor.addEventListener('click', (e) => {
                 const targetId = anchor.getAttribute('href');
                 if (!targetId || targetId === '#') return;
@@ -1601,13 +1927,108 @@
             });
         });
 
-        document.querySelectorAll('[data-scroll-target]').forEach(trigger => {
-            trigger.addEventListener('click', (e) => {
-                const selector = trigger.dataset.scrollTarget;
-                if (!selector) return;
-                e.preventDefault();
-                scrollToTarget(selector);
+        document.querySelectorAll('[data-coming-soon]').forEach(link => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                alert('This Le Clat location is launching soon. Stay tuned!');
             });
+        });
+
+        const setModalContext = (context = '') => {
+            if (!bookingModal) return;
+            const originField = bookingModal.querySelector('input[name="form_origin"]');
+            if (originField) {
+                originField.value = context ? `Booking Modal - ${context}` : 'Booking Modal';
+            }
+        };
+
+        const closeModal = () => {
+            if (!bookingModal) return;
+            bookingModal.classList.remove('is-visible');
+            bookingModal.setAttribute('aria-hidden', 'true');
+            document.body.classList.remove('modal-open');
+            if (lastFocusedElement) {
+                lastFocusedElement.focus({ preventScroll: true });
+                lastFocusedElement = null;
+            }
+        };
+
+        const openModal = (context = '') => {
+            if (!bookingModal) return;
+            lastFocusedElement = document.activeElement;
+            setModalContext(context);
+            bookingModal.classList.add('is-visible');
+            bookingModal.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('modal-open');
+            requestAnimationFrame(() => modalDialog && modalDialog.focus({ preventScroll: true }));
+        };
+
+        document.querySelectorAll('[data-open-modal]').forEach(trigger => {
+            trigger.addEventListener('click', (event) => {
+                event.preventDefault();
+                const context = trigger.dataset.modalContext || '';
+                openModal(context);
+            });
+        });
+
+        document.querySelectorAll('[data-close-modal]').forEach(btn => btn.addEventListener('click', closeModal));
+
+        if (bookingModal) {
+            bookingModal.addEventListener('click', (event) => {
+                if (event.target === bookingModal) {
+                    closeModal();
+                }
+            });
+
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape' && bookingModal.classList.contains('is-visible')) {
+                    closeModal();
+                }
+            });
+        }
+
+        const handleFormSubmit = (event) => {
+            event.preventDefault();
+            const form = event.target;
+            const submitButton = form.querySelector('.form-submit');
+            const originalLabel = submitButton ? submitButton.textContent : '';
+
+            if (submitButton) {
+                submitButton.disabled = true;
+                submitButton.textContent = 'Sending...';
+            }
+
+            const finalize = () => {
+                if (submitButton) {
+                    submitButton.disabled = false;
+                    submitButton.textContent = originalLabel;
+                }
+            };
+
+            const onSuccess = () => {
+                alert('Thank you for your booking request! We will contact you shortly.');
+                form.reset();
+                finalize();
+                if (form.closest('.booking-modal')) {
+                    closeModal();
+                }
+            };
+
+            if (!canUseEmailJs) {
+                onSuccess();
+                return;
+            }
+
+            emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, form)
+                .then(onSuccess)
+                .catch(() => {
+                    alert('We could not submit your request right now. Please try again shortly.');
+                    finalize();
+                });
+        };
+
+        document.querySelectorAll('.booking-form').forEach(form => {
+            form.addEventListener('submit', handleFormSubmit);
         });
 
         // Embla Carousel for Testimonials
@@ -1621,7 +2042,6 @@
                 skipSnaps: false
             });
 
-            // Create dots
             const slides = embla.slideNodes();
             slides.forEach((_, index) => {
                 const dot = document.createElement('button');
@@ -1633,18 +2053,13 @@
             const updateDots = () => {
                 const dots = dotsNode.querySelectorAll('.embla__dot');
                 dots.forEach((dot, index) => {
-                    if (index === embla.selectedScrollSnap()) {
-                        dot.classList.add('is-selected');
-                    } else {
-                        dot.classList.remove('is-selected');
-                    }
+                    dot.classList.toggle('is-selected', index === embla.selectedScrollSnap());
                 });
             };
 
             embla.on('select', updateDots);
             updateDots();
 
-            // Auto-play
             const autoplay = () => {
                 if (embla.canScrollNext()) {
                     embla.scrollNext();
@@ -1655,22 +2070,9 @@
 
             let autoplayInterval = setInterval(autoplay, 5000);
 
-            emblaNode.addEventListener('mouseenter', () => {
-                clearInterval(autoplayInterval);
-            });
-
+            emblaNode.addEventListener('mouseenter', () => clearInterval(autoplayInterval));
             emblaNode.addEventListener('mouseleave', () => {
                 autoplayInterval = setInterval(autoplay, 5000);
-            });
-        }
-
-        // Form submission
-        const contactForm = document.querySelector('.contact-form');
-        if (contactForm) {
-            contactForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                alert('Thank you for your booking request! We will contact you shortly.');
-                e.target.reset();
             });
         }
 
@@ -1716,6 +2118,53 @@
                 }
             });
         }
+
+        const navDropdowns = document.querySelectorAll('.nav-dropdown');
+        const closeAllDropdowns = (exception = null) => {
+            navDropdowns.forEach(dropdown => {
+                if (dropdown === exception) return;
+                if (dropdown.classList.contains('is-open')) {
+                    dropdown.classList.remove('is-open');
+                    const toggle = dropdown.querySelector('.dropdown-toggle');
+                    if (toggle) toggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        };
+
+        const hoverMediaQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
+        const syncHoverClass = () => {
+            document.body.classList.toggle('supports-hover', hoverMediaQuery.matches);
+        };
+        syncHoverClass();
+        if (hoverMediaQuery.addEventListener) {
+            hoverMediaQuery.addEventListener('change', () => {
+                syncHoverClass();
+                closeAllDropdowns();
+            });
+        } else if (hoverMediaQuery.addListener) {
+            hoverMediaQuery.addListener(() => {
+                syncHoverClass();
+                closeAllDropdowns();
+            });
+        }
+
+        navDropdowns.forEach(dropdown => {
+            const toggle = dropdown.querySelector('.dropdown-toggle');
+            if (!toggle) return;
+            toggle.addEventListener('click', (event) => {
+                event.preventDefault();
+                const isOpen = dropdown.classList.contains('is-open');
+                closeAllDropdowns(dropdown);
+                dropdown.classList.toggle('is-open', !isOpen);
+                toggle.setAttribute('aria-expanded', String(!isOpen));
+            });
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!event.target.closest('.nav-dropdown')) {
+                closeAllDropdowns();
+            }
+        });
 
         // Add hover effect to service cards
         document.querySelectorAll('.service-card').forEach(card => {
