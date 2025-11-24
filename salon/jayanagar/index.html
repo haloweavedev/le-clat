@@ -528,6 +528,115 @@
             color: var(--accent-gold);
         }
 
+        .location-gallery {
+            padding: 120px 60px;
+            background: linear-gradient(180deg, #ffffff 0%, #f6f0ea 100%);
+        }
+
+        .gallery-shell {
+            display: grid;
+            grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+            gap: clamp(30px, 5vw, 90px);
+            align-items: start;
+        }
+
+        .gallery-copy {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            max-width: 420px;
+        }
+
+        .gallery-copy .section-subtitle,
+        .gallery-copy .section-title,
+        .gallery-copy .section-description {
+            text-align: left;
+        }
+
+        .gallery-note {
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: rgba(0, 0, 0, 0.5);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(12, minmax(0, 1fr));
+            grid-auto-rows: clamp(42px, 4vw, 60px);
+            grid-auto-flow: dense;
+            gap: 20px;
+        }
+
+        .gallery-media {
+            position: relative;
+            border-radius: 26px;
+            overflow: hidden;
+            min-height: 240px;
+            box-shadow: 0 25px 70px rgba(15, 11, 8, 0.12);
+        }
+
+        .gallery-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+            display: block;
+        }
+
+        .gallery-media:hover img {
+            transform: scale(1.04);
+        }
+
+        .gallery-media.is-horizontal {
+            grid-column: span 7;
+            grid-row: span 4;
+        }
+
+        .gallery-media.is-vertical {
+            grid-column: span 5;
+            grid-row: span 5;
+        }
+
+        .location-video {
+            padding: 120px 60px;
+            background: #fff;
+        }
+
+        .location-video__grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: clamp(40px, 6vw, 110px);
+            align-items: center;
+        }
+
+        .location-video__copy {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            max-width: 520px;
+        }
+
+        .location-video__copy .section-subtitle,
+        .location-video__copy .section-title,
+        .location-video__copy .section-description {
+            text-align: left;
+        }
+
+        .location-video__frame {
+            border-radius: 36px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(14, 11, 9, 0.18);
+        }
+
+        .location-video__frame video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            border-radius: inherit;
+        }
+
         .location-section:nth-of-type(even) {
             background: var(--accent-ivory);
         }
@@ -890,6 +999,18 @@
         }
 
         @media (max-width: 1024px) {
+            .gallery-shell {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(8, minmax(0, 1fr));
+            }
+
+            .location-video__grid {
+                grid-template-columns: 1fr;
+            }
+
             .contact-container {
                 grid-template-columns: 1fr;
             }
@@ -899,8 +1020,21 @@
             .location-intro,
             .location-section,
             .location-info,
-            .contact {
+            .contact,
+            .location-gallery,
+            .location-video {
                 padding: 80px 30px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                grid-auto-rows: 150px;
+            }
+
+            .gallery-media {
+                grid-column: span 2;
+                grid-row: span 1;
+                min-height: 220px;
             }
 
             footer {
@@ -1001,6 +1135,41 @@
         </div>
         <p data-reveal>Step into a world where beauty is unbound — where your well-being, confidence, and comfort take center stage. Our Jayanagar address is thoughtfully designed with private spa suites, couture grooming stations, and a concierge-led experience that anticipates your every need.</p>
         <p data-reveal><em>Every ritual at Le Clat is personal, purposeful, and profoundly luxurious.</em></p>
+    </section>
+
+    <section class="location-gallery" data-reveal-parent>
+        <div class="gallery-shell">
+            <div class="gallery-copy" data-reveal>
+                <p class="section-subtitle">Inside The Atelier</p>
+                <h2 class="section-title">A Moodboard Of Le Clat</h2>
+                <p class="section-description">Curved walls, diffused lighting, and creamy stone textures frame every cocoon within the Jayanagar residence. We curated this visual promenade so you can feel the calm that meets you the moment the elevator doors open.</p>
+                <p class="section-description">Each capture reveals the interplay of natural light with layered materials — from the shampoo lounge to the private spa suites. It's an invitation to slow down before your ritual even begins.</p>
+                <p class="gallery-note">Captured within Le Clat · Jayanagar</p>
+            </div>
+            <div class="gallery-grid">
+                <figure class="gallery-media is-horizontal" data-reveal>
+                    <img src="../../images/jayanagar/images/spa-salon-horizontal-1.webp" alt="Sunlit styling bay with plush lounge seating at Le Clat Jayanagar" loading="lazy">
+                </figure>
+                <figure class="gallery-media is-vertical" data-reveal>
+                    <img src="../../images/jayanagar/images/spa-salon-vertical-1.webp" alt="Arched retail nook with sculpted display plinths" loading="lazy">
+                </figure>
+                <figure class="gallery-media is-horizontal" data-reveal>
+                    <img src="../../images/jayanagar/images/spa-salon-horizontal-2.webp" alt="Spa suite prepared with crisp linens and warm lighting" loading="lazy">
+                </figure>
+                <figure class="gallery-media is-vertical" data-reveal>
+                    <img src="../../images/jayanagar/images/spa-salon-vertical-2.webp" alt="Curved enamel workstation with minimalist lighting detail" loading="lazy">
+                </figure>
+                <figure class="gallery-media is-vertical" data-reveal>
+                    <img src="../../images/jayanagar/images/spa-salon-vertical-3.webp" alt="Soft seating vignette with floral accent" loading="lazy">
+                </figure>
+                <figure class="gallery-media is-horizontal" data-reveal>
+                    <img src="../../images/jayanagar/images/spa-salon-horizontal-3.webp" alt="Lounge perspective showcasing brass accents and hospitality bar" loading="lazy">
+                </figure>
+                <figure class="gallery-media is-vertical" data-reveal>
+                    <img src="../../images/jayanagar/images/spa-salon-vertical-4.webp" alt="Detail of a serene product display bathed in natural light" loading="lazy">
+                </figure>
+            </div>
+        </div>
     </section>
 
     <section class="location-section" id="spa-menu" data-reveal-parent>
@@ -1150,6 +1319,20 @@
             <div class="location-service-card" data-reveal><span class="service-number">16</span><div><h3>Manicure & Pedicure</h3><p>Hand and foot pampering that cleanses, exfoliates, hydrates, and perfects.</p></div></div>
             <div class="location-service-card" data-reveal><span class="service-number">17</span><div><h3>Acrylic Extension & Art</h3><p>Durable acrylic extensions customised to your length and finished with creative nail art.</p></div></div>
             <div class="location-service-card" data-reveal><span class="service-number">18</span><div><h3>Gel Extension & Art</h3><p>Lightweight gel extensions offering a natural, long-lasting look with elegant or bold designs.</p></div></div>
+        </div>
+    </section>
+
+    <section class="location-video" data-reveal-parent>
+        <div class="location-video__grid">
+            <div class="location-video__copy" data-reveal>
+                <p class="section-subtitle">In Motion</p>
+                <h2 class="section-title">A Quiet Glimpse Into Le Clat</h2>
+                <p class="section-description">Float through the curved hallways, illuminated mirrors, and tactile finishes that define the Jayanagar flagship. The film captures the same sensorial calm you’ll feel while your stylist, barber, or therapist works their artistry.</p>
+                <p class="section-description">Every zone — from the color atelier to the spa suites — is buffered with generous circulation, ensuring privacy and an easy, unhurried rhythm to your appointment.</p>
+            </div>
+            <div class="location-video__frame" data-reveal>
+                <video src="../../images/jayanagar/spa-salon-vertical-video-1.MP4" autoplay muted loop playsinline preload="auto" aria-label="Walkthrough of the Le Clat Jayanagar spa and salon interiors"></video>
+            </div>
         </div>
     </section>
 
