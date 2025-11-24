@@ -44,122 +44,144 @@
             filter: blur(0);
         }
 
-        nav {
+        .site-header {
             position: fixed;
             top: 0;
+            left: 0;
             width: 100%;
-            padding: 20px 60px;
+            z-index: 1100;
+            background: rgba(254, 254, 254, 0.45);
+            backdrop-filter: blur(22px);
+            transition: background 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
+        }
+
+        .site-header.is-scrolled {
+            background: rgba(254, 254, 254, 0.98);
+            box-shadow: 0 18px 55px rgba(17, 12, 9, 0.08);
+        }
+
+        .header-shell {
             display: flex;
+            align-items: center;
             justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            background: rgba(254, 254, 254, 0);
-            backdrop-filter: blur(10px);
-            transition: all 0.5s ease;
+            gap: 32px;
+            padding: clamp(16px, 3vw, 26px) clamp(24px, 4vw, 80px);
         }
 
-        nav.scrolled {
-            background: rgba(254, 254, 254, 0.95);
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
-            padding: 15px 60px;
-        }
-
-        .logo {
-            display: flex;
+        .brand-mark {
+            display: inline-flex;
             align-items: center;
-            gap: 14px;
-            font-size: 24px;
-            letter-spacing: 3px;
+            gap: 18px;
             color: var(--text-primary);
-            text-transform: uppercase;
+            text-decoration: none;
         }
 
-        .logo img {
-            height: 48px;
+        .brand-mark img {
+            height: 56px;
             width: auto;
             display: block;
         }
 
-        .nav-links {
+        .brand-text {
             display: flex;
-            gap: 40px;
-            list-style: none;
-            align-items: center;
-        }
-
-        .nav-links li {
-            position: relative;
-            list-style: none;
-        }
-
-        .nav-links a,
-        .nav-links button {
-            color: var(--text-primary);
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 300;
-            letter-spacing: 1.5px;
+            flex-direction: column;
+            letter-spacing: 4px;
             text-transform: uppercase;
+        }
+
+        .brand-text span {
+            font-family: "Cormorant Garamond", serif;
+            font-size: 22px;
+            letter-spacing: 5px;
+            line-height: 1;
+        }
+
+        .brand-text small {
+            font-family: "Roboto", sans-serif;
+            font-size: 10px;
+            letter-spacing: 4px;
+            opacity: 0.7;
+        }
+
+        .primary-nav {
             position: relative;
-            transition: color 0.3s ease;
+        }
+
+        .nav-cluster {
+            display: flex;
+            align-items: center;
+            gap: 36px;
+            list-style: none;
+        }
+
+        .nav-cluster__item {
+            position: relative;
+        }
+
+        .nav-trigger,
+        .nav-anchor {
             background: none;
             border: none;
-            padding: 0;
+            font-size: 12px;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--text-primary);
             cursor: pointer;
+            padding: 10px 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+            text-decoration: none;
+            transition: color 0.3s ease;
         }
 
-        .nav-links a::after,
-        .nav-links button::after {
+        .nav-trigger::after,
+        .nav-anchor::after {
             content: '';
             position: absolute;
-            bottom: -5px;
             left: 0;
+            bottom: 6px;
             width: 0;
             height: 1px;
             background: var(--accent-gold);
-            transition: width 0.4s ease;
+            transition: width 0.35s ease;
         }
 
-        .nav-links a:hover::after,
-        .nav-links button:hover::after {
+        .nav-trigger:hover::after,
+        .nav-anchor:hover::after,
+        .nav-anchor:focus-visible::after,
+        .nav-trigger:focus-visible::after {
             width: 100%;
         }
 
-        .nav-dropdown .dropdown-toggle {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding-bottom: 6px;
-        }
-
-        .nav-dropdown .dropdown-toggle svg {
+        .nav-trigger svg {
             width: 12px;
             height: 12px;
             transition: transform 0.3s ease;
         }
 
-        .nav-dropdown.is-open .dropdown-toggle svg,
-        body.supports-hover .nav-dropdown:hover .dropdown-toggle svg,
-        body.supports-hover .nav-dropdown:focus-within .dropdown-toggle svg {
+        .nav-cluster__item.is-open .nav-trigger svg {
             transform: rotate(180deg);
         }
 
-        .dropdown-menu {
+        .dropdown-panel {
             position: absolute;
-            top: calc(100% + 8px);
-            left: 0;
-            min-width: 230px;
-            padding: 16px;
-            border-radius: 14px;
-            background: rgba(254, 254, 254, 0.98);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+            top: calc(100% + 20px);
+            left: 50%;
+            transform: translate(-50%, -8px);
+            min-width: 280px;
+            padding: 24px 26px;
+            border-radius: 24px;
+            background: rgba(254, 254, 254, 0.96);
+            border: 1px solid rgba(201, 169, 128, 0.35);
+            box-shadow: 0 35px 90px rgba(14, 11, 9, 0.15);
             opacity: 0;
             pointer-events: none;
-            transform: translateY(-12px);
-            transition: opacity 0.25s ease, transform 0.25s ease;
+            transition: opacity 0.3s ease, transform 0.3s ease;
         }
 
-        .dropdown-menu::before {
+        .dropdown-panel::before {
             content: '';
             position: absolute;
             top: -18px;
@@ -168,30 +190,122 @@
             height: 18px;
         }
 
-        body.supports-hover .nav-dropdown:hover .dropdown-menu,
-        body.supports-hover .nav-dropdown:focus-within .dropdown-menu,
-        .nav-dropdown.is-open .dropdown-menu {
+        .nav-cluster__item.is-open .dropdown-panel {
             opacity: 1;
             pointer-events: auto;
-            transform: translateY(0);
+            transform: translate(-50%, 0);
+        }
+
+        .dropdown-heading {
+            font-size: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(0, 0, 0, 0.55);
+            margin-bottom: 12px;
+        }
+
+        .dropdown-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
         }
 
         .dropdown-link {
             display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 30px;
-            font-size: 12px;
-            letter-spacing: 2px;
-            color: var(--text-primary);
+            flex-direction: column;
+            gap: 4px;
+            padding: 14px 16px;
+            border-radius: 16px;
             text-decoration: none;
-            transition: background 0.25s ease, padding-left 0.25s ease;
+            color: var(--text-primary);
+            background: transparent;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .dropdown-link strong {
+            font-family: "Cormorant Garamond", serif;
+            font-size: 18px;
+            letter-spacing: 2px;
+        }
+
+        .dropdown-link span {
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.6;
         }
 
         .dropdown-link:hover,
-        .dropdown-link:focus {
+        .dropdown-link:focus-visible {
             background: rgba(201, 169, 128, 0.12);
-            padding-left: 36px;
+            transform: translateX(6px);
+        }
+
+        .dropdown-link[data-coming-soon="true"] {
+            opacity: 0.45;
+            cursor: not-allowed;
+        }
+
+        .header-cta {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-toggle {
+            width: 42px;
+            height: 42px;
+            border-radius: 999px;
+            border: 1px solid rgba(28, 28, 28, 0.35);
+            background: transparent;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .header-toggle span {
+            position: absolute;
+            width: 18px;
+            height: 2px;
+            background: var(--text-primary);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .header-toggle span:first-child {
+            transform: translateY(-4px);
+        }
+
+        .header-toggle span:last-child {
+            transform: translateY(4px);
+        }
+
+        .site-header.is-nav-open .header-toggle span:first-child {
+            transform: rotate(45deg);
+        }
+
+        .site-header.is-nav-open .header-toggle span:last-child {
+            transform: rotate(-45deg);
+        }
+
+        .header-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(17, 12, 10, 0.35);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .site-header.is-nav-open .header-overlay {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        body.nav-open {
+            overflow: hidden;
         }
 
         .book-now-btn {
@@ -209,6 +323,88 @@
         .book-now-btn:hover {
             background: var(--text-primary);
             color: var(--bg-primary);
+        }
+
+        .site-header .book-now-btn {
+            border-radius: 999px;
+            padding: 11px 28px;
+            letter-spacing: 2.5px;
+            font-size: 11px;
+        }
+
+        @media (max-width: 1200px) {
+            .nav-cluster {
+                gap: 28px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .primary-nav {
+                position: fixed;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                width: min(360px, 80vw);
+                padding: 120px 32px 40px;
+                background: rgba(254, 254, 254, 0.98);
+                box-shadow: -30px 0 60px rgba(12, 8, 1, 0.2);
+                transform: translateX(100%);
+                transition: transform 0.35s ease;
+            }
+
+            .site-header.is-nav-open .primary-nav {
+                transform: translateX(0);
+            }
+
+            .nav-cluster {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 28px;
+            }
+
+            .dropdown-panel {
+                position: static;
+                transform: none;
+                opacity: 1;
+                pointer-events: auto;
+                background: transparent;
+                border: none;
+                border-radius: 0;
+                box-shadow: none;
+                padding: 8px 0 0;
+                display: none;
+            }
+
+            .nav-cluster__item.is-open .dropdown-panel {
+                display: block;
+            }
+
+            .dropdown-link {
+                padding: 12px 0;
+                border-radius: 0;
+            }
+
+            .header-toggle {
+                display: inline-flex;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-shell {
+                padding: 14px 20px;
+            }
+
+            .brand-mark img {
+                height: 48px;
+            }
+
+            .brand-text span {
+                font-size: 18px;
+            }
+
+            .site-header .book-now-btn {
+                display: none;
+            }
         }
 
         .hero {
@@ -718,21 +914,6 @@
             }
         }
 
-        .mobile-menu-btn {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            background: none;
-            border: none;
-            cursor: pointer;
-        }
-
-        .mobile-menu-btn span {
-            width: 25px;
-            height: 2px;
-            background: var(--text-primary);
-        }
-
         @media (max-width: 1024px) {
             .contact-container {
                 grid-template-columns: 1fr;
@@ -740,40 +921,6 @@
         }
 
         @media (max-width: 768px) {
-            nav {
-                padding: 15px 30px;
-            }
-
-            .nav-links {
-                display: none;
-                flex-direction: column;
-                gap: 20px;
-            }
-
-            .nav-dropdown .dropdown-menu {
-                position: static;
-                opacity: 1;
-                pointer-events: auto;
-                background: transparent;
-                box-shadow: none;
-                padding: 0;
-                transform: none;
-                display: none;
-            }
-
-            .nav-dropdown.is-open .dropdown-menu {
-                display: block;
-                margin-top: 10px;
-            }
-
-            .dropdown-link {
-                padding: 10px 0;
-            }
-
-            .mobile-menu-btn {
-                display: flex;
-            }
-
             .location-intro,
             .location-section,
             .location-info,
@@ -788,48 +935,79 @@
     </style>
 </head>
 <body>
-    <nav id="navbar">
-        <div class="logo">
-            <img src="../../images/logo.png" alt="Le Clat logo" loading="lazy">
+    <header class="site-header" data-header>
+        <div class="header-shell">
+            <a class="brand-mark" href="https://haloweavedev.github.io/le-clat/">
+                <img src="../../images/logo.png" alt="Le Clat logo" loading="lazy">
+                <div class="brand-text">
+                    <span>Le Clat</span>
+                    <small>Spa · Salon · Atelier</small>
+                </div>
+            </a>
+            <nav class="primary-nav" aria-label="Primary" data-header-nav>
+                <ul class="nav-cluster">
+                <li class="nav-cluster__item has-dropdown" data-dropdown>
+                    <button class="nav-trigger" type="button" aria-expanded="false" data-dropdown-trigger>
+                        Spa
+                        <svg viewBox="0 0 12 8" aria-hidden="true" focusable="false">
+                            <path d="M1 1.5L6 6.5L11 1.5" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                    <div class="dropdown-panel" role="menu" data-dropdown-panel>
+                        <p class="dropdown-heading">Spa Residences</p>
+                        <div class="dropdown-list">
+                            <a class="dropdown-link" href="https://haloweavedev.github.io/le-clat/spa/jayanagar/">
+                                <strong>Jayanagar</strong>
+                                <span>Flagship Retreat</span>
+                            </a>
+                            <a class="dropdown-link" href="#" data-coming-soon="true">
+                                <strong>Electronic City</strong>
+                                <span>Opening Shortly</span>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-cluster__item has-dropdown" data-dropdown>
+                    <button class="nav-trigger" type="button" aria-expanded="false" data-dropdown-trigger>
+                        Salon
+                        <svg viewBox="0 0 12 8" aria-hidden="true" focusable="false">
+                            <path d="M1 1.5L6 6.5L11 1.5" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                    <div class="dropdown-panel" role="menu" data-dropdown-panel>
+                        <p class="dropdown-heading">Salon Addresses</p>
+                        <div class="dropdown-list">
+                            <a class="dropdown-link" href="https://haloweavedev.github.io/le-clat/salon/jayanagar/">
+                                <strong>Jayanagar</strong>
+                                <span>Beauty Atelier</span>
+                            </a>
+                            <a class="dropdown-link" href="https://haloweavedev.github.io/le-clat/salon/shantinagar/">
+                                <strong>Shantinagar</strong>
+                                <span>City Studio</span>
+                            </a>
+                            <a class="dropdown-link" href="#" data-coming-soon="true">
+                                <strong>Electronic City</strong>
+                                <span>Opening Shortly</span>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-cluster__item"><a class="nav-anchor" href="https://haloweavedev.github.io/le-clat/spa/shantinagar/#spa-menu">Spa Menu</a></li>
+                <li class="nav-cluster__item"><a class="nav-anchor" href="https://haloweavedev.github.io/le-clat/spa/shantinagar/#salon-menu">Salon Artistry</a></li>
+                <li class="nav-cluster__item"><a class="nav-anchor" href="https://haloweavedev.github.io/le-clat/spa/shantinagar/#visit">Visit</a></li>
+                <li class="nav-cluster__item"><a class="nav-anchor" href="https://haloweavedev.github.io/le-clat/spa/shantinagar/#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="header-cta">
+                <button class="book-now-btn" type="button" data-open-modal data-modal-context="Navigation Book Now">Book Now</button>
+                <button class="header-toggle" type="button" aria-expanded="false" aria-label="Toggle navigation" data-header-toggle>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
         </div>
-        <ul class="nav-links">
-            <li class="nav-item nav-dropdown">
-                <button class="dropdown-toggle" type="button" aria-expanded="false">
-                    Spa
-                    <svg viewBox="0 0 12 8" aria-hidden="true" focusable="false">
-                        <path d="M1 1.5L6 6.5L11 1.5" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-link" href="https://haloweavedev.github.io/le-clat/spa/jayanagar/">Jayanagar</a></li>
-                    <li><a class="dropdown-link" href="#" data-coming-soon="true">Electronic City</a></li>
-                </ul>
-            </li>
-            <li class="nav-item nav-dropdown">
-                <button class="dropdown-toggle" type="button" aria-expanded="false">
-                    Salon
-                    <svg viewBox="0 0 12 8" aria-hidden="true" focusable="false">
-                        <path d="M1 1.5L6 6.5L11 1.5" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-link" href="https://haloweavedev.github.io/le-clat/salon/jayanagar/">Jayanagar</a></li>
-                    <li><a class="dropdown-link" href="https://haloweavedev.github.io/le-clat/salon/shantinagar/">Shantinagar</a></li>
-                    <li><a class="dropdown-link" href="#" data-coming-soon="true">Electronic City</a></li>
-                </ul>
-            </li>
-            <li class="nav-item"><a class="nav-link" href="https://haloweavedev.github.io/le-clat/spa/shantinagar/#spa-menu">Spa Menu</a></li>
-            <li class="nav-item"><a class="nav-link" href="https://haloweavedev.github.io/le-clat/spa/shantinagar/#salon-menu">Salon Artistry</a></li>
-            <li class="nav-item"><a class="nav-link" href="https://haloweavedev.github.io/le-clat/spa/shantinagar/#visit">Visit</a></li>
-            <li class="nav-item"><a class="nav-link" href="https://haloweavedev.github.io/le-clat/spa/shantinagar/#contact">Contact</a></li>
-        </ul>
-        <button class="book-now-btn" type="button" data-open-modal data-modal-context="Navigation Book Now">Book Now</button>
-        <button class="mobile-menu-btn">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-    </nav>
+        <div class="header-overlay" data-header-overlay></div>
+    </header>
 
     <section class="hero" data-reveal-parent>
         <div class="hero-bg"></div>
@@ -1120,12 +1298,57 @@
         const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID';
         const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
 
-        const navbar = document.getElementById('navbar');
+        const siteHeader = document.querySelector('[data-header]');
+        const headerNav = siteHeader ? siteHeader.querySelector('[data-header-nav]') : null;
+        const headerToggle = siteHeader ? siteHeader.querySelector('[data-header-toggle]') : null;
+        const headerOverlay = siteHeader ? siteHeader.querySelector('[data-header-overlay]') : null;
         const heroContent = document.querySelector('.hero-content');
         const bookingModal = document.getElementById('bookingModal');
         const modalDialog = bookingModal ? bookingModal.querySelector('.booking-modal__dialog') : null;
         let lenisInstance = null;
         let lastFocusedElement = null;
+
+        const dropdowns = siteHeader ? Array.from(siteHeader.querySelectorAll('[data-dropdown]')) : [];
+        const navLinks = headerNav ? Array.from(headerNav.querySelectorAll('a')) : [];
+        const prefersHover = window.matchMedia('(hover: hover) and (pointer: fine)');
+
+        const closeDropdowns = (exception = null) => {
+            dropdowns.forEach(dropdown => {
+                if (exception && dropdown === exception) return;
+                dropdown.classList.remove('is-open');
+                const trigger = dropdown.querySelector('[data-dropdown-trigger]');
+                if (trigger) trigger.setAttribute('aria-expanded', 'false');
+            });
+        }
+        };
+
+        const toggleDropdown = (dropdown, forceState = null) => {
+            if (!dropdown) return;
+            const shouldOpen = forceState !== null ? forceState : !dropdown.classList.contains('is-open');
+            if (shouldOpen) {
+                closeDropdowns(dropdown);
+                dropdown.classList.add('is-open');
+            } else {
+                dropdown.classList.remove('is-open');
+            }
+            const trigger = dropdown.querySelector('[data-dropdown-trigger]');
+            if (trigger) trigger.setAttribute('aria-expanded', String(shouldOpen));
+        };
+
+        const closeNav = () => {
+            if (!siteHeader) return;
+            siteHeader.classList.remove('is-nav-open');
+            document.body.classList.remove('nav-open');
+            if (headerToggle) headerToggle.setAttribute('aria-expanded', 'false');
+            closeDropdowns();
+        };
+
+        const openNav = () => {
+            if (!siteHeader) return;
+            siteHeader.classList.add('is-nav-open');
+            document.body.classList.add('nav-open');
+            if (headerToggle) headerToggle.setAttribute('aria-expanded', 'true');
+        };
 
         const hasEmailJsLibrary = typeof emailjs !== 'undefined';
         const canUseEmailJs = hasEmailJsLibrary &&
@@ -1144,11 +1367,11 @@
         }
 
         const handleScrollEffects = (scrollY) => {
-            if (navbar) {
-                if (scrollY > 100) {
-                    navbar.classList.add('scrolled');
+            if (siteHeader) {
+                if (scrollY > 40) {
+                    siteHeader.classList.add('is-scrolled');
                 } else {
-                    navbar.classList.remove('scrolled');
+                    siteHeader.classList.remove('is-scrolled');
                 }
             }
 
@@ -1169,13 +1392,17 @@
             const target = typeof targetCandidate === 'string' ? document.querySelector(targetCandidate) : targetCandidate;
             if (!target) return;
 
+            const offset = -(siteHeader ? siteHeader.offsetHeight + 20 : 0);
+
             if (lenisInstance) {
                 lenisInstance.scrollTo(target, {
                     duration: 1.2,
-                    easing: (t) => 1 - Math.pow(1 - t, 3)
+                    easing: (t) => 1 - Math.pow(1 - t, 3),
+                    offset
                 });
             } else {
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                const top = target.getBoundingClientRect().top + window.pageYOffset + offset;
+                window.scrollTo({ top, behavior: 'smooth' });
             }
         };
 
@@ -1191,21 +1418,41 @@
             handleScrollEffects(window.scrollY || window.pageYOffset);
         } else {
             window.addEventListener('scroll', () => handleScrollEffects(window.scrollY || window.pageYOffset));
+            handleScrollEffects(window.scrollY || window.pageYOffset);
         }
 
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            if (anchor.hasAttribute('data-open-modal') || anchor.dataset.comingSoon === 'true') return;
+        const attachSmoothScroll = (anchor, hash) => {
+            if (!hash || hash === '#') return;
+            const targetElement = document.querySelector(hash);
+            if (!targetElement) return;
 
-            anchor.addEventListener('click', (e) => {
-                const targetId = anchor.getAttribute('href');
-                if (!targetId || targetId === '#') return;
-
-                const targetElement = document.querySelector(targetId);
-                if (!targetElement) return;
-
-                e.preventDefault();
+            anchor.addEventListener('click', (event) => {
+                event.preventDefault();
+                closeNav();
                 scrollToTarget(targetElement);
             });
+        };
+
+        document.querySelectorAll('a[href]').forEach(anchor => {
+            if (anchor.hasAttribute('data-open-modal') || anchor.dataset.comingSoon === 'true') return;
+            const href = anchor.getAttribute('href');
+            if (!href || href === '#') return;
+
+            if (href.startsWith('#')) {
+                attachSmoothScroll(anchor, href);
+                return;
+            }
+
+            if (href.includes('#')) {
+                try {
+                    const targetUrl = new URL(href, window.location.origin);
+                    if (targetUrl.pathname === window.location.pathname && targetUrl.hash) {
+                        attachSmoothScroll(anchor, targetUrl.hash);
+                    }
+                } catch (error) {
+                    // Ignore invalid URLs
+                }
+            }
         });
 
         document.querySelectorAll('[data-coming-soon]').forEach(link => {
@@ -1330,74 +1577,64 @@
             revealObserver.observe(el);
         });
 
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        if (mobileMenuBtn) {
-            mobileMenuBtn.addEventListener('click', function() {
-                const navLinks = document.querySelector('.nav-links');
-                const spans = this.querySelectorAll('span');
-                
-                if (navLinks.style.display === 'flex') {
-                    navLinks.style.display = 'none';
-                    spans.forEach(span => span.style.transform = 'none');
+        if (headerToggle) {
+            headerToggle.addEventListener('click', () => {
+                if (siteHeader && siteHeader.classList.contains('is-nav-open')) {
+                    closeNav();
                 } else {
-                    navLinks.style.display = 'flex';
-                    navLinks.style.flexDirection = 'column';
-                    navLinks.style.position = 'absolute';
-                    navLinks.style.top = '70px';
-                    navLinks.style.right = '30px';
-                    navLinks.style.background = 'rgba(254, 254, 254, 0.98)';
-                    navLinks.style.padding = '20px';
-                    navLinks.style.borderRadius = '4px';
-                    navLinks.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
+                    openNav();
                 }
             });
         }
 
-        const navDropdowns = document.querySelectorAll('.nav-dropdown');
-        const closeAllDropdowns = (exception = null) => {
-            navDropdowns.forEach(dropdown => {
-                if (dropdown === exception) return;
-                if (dropdown.classList.contains('is-open')) {
-                    dropdown.classList.remove('is-open');
-                    const toggle = dropdown.querySelector('.dropdown-toggle');
-                    if (toggle) toggle.setAttribute('aria-expanded', 'false');
-                }
-            });
-        };
-
-        const hoverMediaQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
-        const syncHoverClass = () => {
-            document.body.classList.toggle('supports-hover', hoverMediaQuery.matches);
-        };
-        syncHoverClass();
-        if (hoverMediaQuery.addEventListener) {
-            hoverMediaQuery.addEventListener('change', () => {
-                syncHoverClass();
-                closeAllDropdowns();
-            });
-        } else if (hoverMediaQuery.addListener) {
-            hoverMediaQuery.addListener(() => {
-                syncHoverClass();
-                closeAllDropdowns();
+        if (headerOverlay) {
+            headerOverlay.addEventListener('click', () => {
+                closeNav();
             });
         }
 
-        navDropdowns.forEach(dropdown => {
-            const toggle = dropdown.querySelector('.dropdown-toggle');
-            if (!toggle) return;
-            toggle.addEventListener('click', (event) => {
-                event.preventDefault();
-                const isOpen = dropdown.classList.contains('is-open');
-                closeAllDropdowns(dropdown);
-                dropdown.classList.toggle('is-open', !isOpen);
-                toggle.setAttribute('aria-expanded', String(!isOpen));
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                closeNav();
             });
         });
 
-        document.addEventListener('click', (event) => {
-            if (!event.target.closest('.nav-dropdown')) {
-                closeAllDropdowns();
+        dropdowns.forEach(dropdown => {
+            const trigger = dropdown.querySelector('[data-dropdown-trigger]');
+            if (!trigger) return;
+
+            trigger.addEventListener('click', (event) => {
+                event.preventDefault();
+                toggleDropdown(dropdown);
+            });
+
+            dropdown.addEventListener('mouseenter', () => {
+                if (!prefersHover.matches || window.innerWidth <= 1024) return;
+                toggleDropdown(dropdown, true);
+            });
+
+            dropdown.addEventListener('mouseleave', () => {
+                if (!prefersHover.matches || window.innerWidth <= 1024) return;
+                toggleDropdown(dropdown, false);
+            });
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 1024) {
+                closeNav();
             }
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                closeNav();
+            }
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!siteHeader) return;
+            if (siteHeader.contains(event.target)) return;
+            closeNav();
         });
     </script>
 </body>
