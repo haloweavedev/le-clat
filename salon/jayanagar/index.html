@@ -29,6 +29,7 @@
             overflow-x: hidden;
         }
 
+        /* --- Animations --- */
         [data-reveal] {
             opacity: 0;
             transform: translate3d(0, 40px, 0) scale(0.98);
@@ -44,6 +45,7 @@
             filter: blur(0);
         }
 
+        /* --- Header --- */
         .site-header {
             position: fixed;
             top: 0;
@@ -382,6 +384,7 @@
             }
         }
 
+        /* --- Hero --- */
         .hero {
             height: 100vh;
             position: relative;
@@ -477,6 +480,7 @@
             color: var(--bg-primary);
         }
 
+        /* --- Sections General --- */
         .section-header {
             text-align: center;
             max-width: 800px;
@@ -528,6 +532,7 @@
             color: var(--accent-gold);
         }
 
+        /* --- Gallery (Moodboard) --- */
         .location-gallery {
             padding: 120px 60px;
             background: linear-gradient(180deg, #ffffff 0%, #f6f0ea 100%);
@@ -545,6 +550,8 @@
             flex-direction: column;
             gap: 18px;
             max-width: 420px;
+            position: sticky;
+            top: 120px;
         }
 
         .gallery-copy .section-subtitle,
@@ -558,46 +565,53 @@
             letter-spacing: 1px;
             text-transform: uppercase;
             color: rgba(0, 0, 0, 0.5);
+            margin-top: 20px;
         }
 
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(12, minmax(0, 1fr));
-            grid-auto-rows: clamp(42px, 4vw, 60px);
-            grid-auto-flow: dense;
-            gap: 20px;
+            grid-template-columns: repeat(12, 1fr);
+            /* Explicit row height ensures background images have space */
+            grid-auto-rows: minmax(280px, 1fr);
+            gap: 24px;
         }
 
         .gallery-media {
             position: relative;
             border-radius: 26px;
             overflow: hidden;
-            min-height: 240px;
             box-shadow: 0 25px 70px rgba(15, 11, 8, 0.12);
+            /* Background Image Handling */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
         }
 
-        .gallery-media img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.8s ease;
-            display: block;
+        .gallery-media:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 35px 80px rgba(15, 11, 8, 0.18);
         }
 
-        .gallery-media:hover img {
-            transform: scale(1.04);
+        /* Grid Spans */
+        .gallery-media.is-wide {
+            grid-column: span 8;
         }
 
-        .gallery-media.is-horizontal {
-            grid-column: span 7;
-            grid-row: span 4;
+        .gallery-media.is-tall {
+            grid-column: span 4;
+            grid-row: span 2;
         }
 
-        .gallery-media.is-vertical {
-            grid-column: span 5;
-            grid-row: span 5;
+        .gallery-media.is-box {
+            grid-column: span 4;
         }
 
+        .gallery-media.is-medium {
+            grid-column: span 6;
+        }
+
+        /* --- Video Section --- */
         .location-video {
             padding: 120px 60px;
             background: #fff;
@@ -627,6 +641,13 @@
             border-radius: 36px;
             overflow: hidden;
             box-shadow: 0 30px 60px rgba(14, 11, 9, 0.18);
+            /* Video Constraints */
+            width: 100%;
+            max-width: 500px; /* Prevents vertical video from being too wide on desktop */
+            max-height: 70vh; /* Constraint requested */
+            aspect-ratio: 9/16; /* Maintains vertical video shape */
+            margin: 0 auto; /* Centers in column */
+            position: relative;
         }
 
         .location-video__frame video {
@@ -634,9 +655,9 @@
             height: 100%;
             object-fit: cover;
             display: block;
-            border-radius: inherit;
         }
 
+        /* --- Services --- */
         .location-section:nth-of-type(even) {
             background: var(--accent-ivory);
         }
@@ -682,6 +703,7 @@
             line-height: 1.7;
         }
 
+        /* --- Info & Contact --- */
         .location-info {
             background: #fff;
         }
@@ -869,6 +891,7 @@
             margin: 16px 0;
         }
 
+        /* --- Floating & Modal --- */
         .floating-booking {
             position: fixed;
             bottom: 30px;
@@ -998,17 +1021,44 @@
             }
         }
 
+        /* --- Responsive --- */
         @media (max-width: 1024px) {
             .gallery-shell {
                 grid-template-columns: 1fr;
             }
+            
+            .gallery-copy {
+                position: static;
+                max-width: 100%;
+                margin-bottom: 40px;
+            }
 
             .gallery-grid {
-                grid-template-columns: repeat(8, minmax(0, 1fr));
+                grid-template-columns: repeat(2, 1fr);
+                grid-auto-rows: 240px;
+            }
+
+            .gallery-media.is-wide,
+            .gallery-media.is-tall,
+            .gallery-media.is-box,
+            .gallery-media.is-medium {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+            
+            /* Make specific items span 2 for variety on tablet */
+            .gallery-media:nth-child(3n+1) {
+                grid-column: span 2;
             }
 
             .location-video__grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .location-video__frame {
+                max-width: 100%;
+                /* On mobile/tablet, we can relax the height slightly or keep it */
+                max-height: 60vh; 
             }
 
             .contact-container {
@@ -1027,14 +1077,12 @@
             }
 
             .gallery-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-                grid-auto-rows: 150px;
+                grid-template-columns: 1fr;
+                grid-auto-rows: 220px;
             }
-
-            .gallery-media {
-                grid-column: span 2;
-                grid-row: span 1;
-                min-height: 220px;
+            
+            .gallery-media:nth-child(n) {
+                grid-column: span 1;
             }
 
             footer {
@@ -1147,27 +1195,34 @@
                 <p class="gallery-note">Captured within Le Clat · Jayanagar</p>
             </div>
             <div class="gallery-grid">
-                <figure class="gallery-media is-horizontal" data-reveal>
-                    <img src="../../images/jayanagar/images/spa-salon-horizontal-1.webp" alt="Sunlit styling bay with plush lounge seating at Le Clat Jayanagar" loading="lazy">
-                </figure>
-                <figure class="gallery-media is-vertical" data-reveal>
-                    <img src="../../images/jayanagar/images/spa-salon-vertical-1.webp" alt="Arched retail nook with sculpted display plinths" loading="lazy">
-                </figure>
-                <figure class="gallery-media is-horizontal" data-reveal>
-                    <img src="../../images/jayanagar/images/spa-salon-horizontal-2.webp" alt="Spa suite prepared with crisp linens and warm lighting" loading="lazy">
-                </figure>
-                <figure class="gallery-media is-vertical" data-reveal>
-                    <img src="../../images/jayanagar/images/spa-salon-vertical-2.webp" alt="Curved enamel workstation with minimalist lighting detail" loading="lazy">
-                </figure>
-                <figure class="gallery-media is-vertical" data-reveal>
-                    <img src="../../images/jayanagar/images/spa-salon-vertical-3.webp" alt="Soft seating vignette with floral accent" loading="lazy">
-                </figure>
-                <figure class="gallery-media is-horizontal" data-reveal>
-                    <img src="../../images/jayanagar/images/spa-salon-horizontal-3.webp" alt="Lounge perspective showcasing brass accents and hospitality bar" loading="lazy">
-                </figure>
-                <figure class="gallery-media is-vertical" data-reveal>
-                    <img src="../../images/jayanagar/images/spa-salon-vertical-4.webp" alt="Detail of a serene product display bathed in natural light" loading="lazy">
-                </figure>
+                <!-- Using background-image for perfect cover fit -->
+                <div class="gallery-media is-wide" data-reveal 
+                     style="background-image: url('../../images/jayanagar/images/spa-salon-horizontal-1.webp');" 
+                     role="img" aria-label="Sunlit styling bay with plush lounge seating"></div>
+                
+                <div class="gallery-media is-tall" data-reveal 
+                     style="background-image: url('../../images/jayanagar/images/spa-salon-vertical-1.webp');" 
+                     role="img" aria-label="Arched retail nook with sculpted display plinths"></div>
+                
+                <div class="gallery-media is-box" data-reveal 
+                     style="background-image: url('../../images/jayanagar/images/spa-salon-horizontal-2.webp');" 
+                     role="img" aria-label="Spa suite prepared with crisp linens"></div>
+                
+                <div class="gallery-media is-box" data-reveal 
+                     style="background-image: url('../../images/jayanagar/images/spa-salon-vertical-2.webp');" 
+                     role="img" aria-label="Curved enamel workstation"></div>
+                
+                <div class="gallery-media is-tall" data-reveal 
+                     style="background-image: url('../../images/jayanagar/images/spa-salon-vertical-3.webp');" 
+                     role="img" aria-label="Soft seating vignette with floral accent"></div>
+                
+                <div class="gallery-media is-medium" data-reveal 
+                     style="background-image: url('../../images/jayanagar/images/spa-salon-horizontal-3.webp');" 
+                     role="img" aria-label="Lounge perspective showcasing brass accents"></div>
+                
+                <div class="gallery-media is-box" data-reveal 
+                     style="background-image: url('../../images/jayanagar/images/spa-salon-vertical-4.webp');" 
+                     role="img" aria-label="Detail of a serene product display"></div>
             </div>
         </div>
     </section>
