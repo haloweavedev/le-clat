@@ -86,6 +86,9 @@
 
         .primary-nav {
             position: relative;
+            display: flex;
+            flex-direction: column;
+            z-index: 2;
         }
 
         .nav-cluster {
@@ -264,11 +267,64 @@
         }
 
         .site-header.is-nav-open .header-toggle span:first-child {
-            transform: rotate(45deg);
+            transform: translateY(0) rotate(45deg);
         }
 
         .site-header.is-nav-open .header-toggle span:last-child {
-            transform: rotate(-45deg);
+            transform: translateY(0) rotate(-45deg);
+        }
+
+        .nav-mobile-cta {
+            display: none;
+        }
+
+        .nav-mobile-cta .nav-book-btn {
+            width: 100%;
+            text-align: center;
+        }
+
+        .nav-mobile-meta {
+            display: grid;
+            gap: 6px;
+            font-size: 13px;
+            color: #3a3a3a;
+            letter-spacing: 0.5px;
+            line-height: 1.5;
+        }
+
+        .nav-mobile-meta .nav-meta-label {
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(28, 28, 28, 0.6);
+        }
+
+        .nav-mobile-meta .nav-meta-link {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .nav-close {
+            display: none;
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid rgba(28, 28, 28, 0.15);
+            background: rgba(254, 254, 254, 0.9);
+            color: var(--text-primary);
+            font-size: 20px;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.25s ease, transform 0.25s ease;
+        }
+
+        .nav-close:hover {
+            background: rgba(201, 169, 128, 0.15);
+            transform: translateY(-1px);
         }
 
         .header-overlay {
@@ -278,6 +334,7 @@
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.3s ease;
+            z-index: 1;
         }
 
         .site-header.is-nav-open .header-overlay {
@@ -322,25 +379,29 @@
         @media (max-width: 1024px) {
             .primary-nav {
                 position: fixed;
-                top: 0;
-                right: 0;
-                bottom: 0;
-                width: min(360px, 80vw);
-                padding: 120px 32px 40px;
-                background: rgba(254, 254, 254, 0.98);
-                box-shadow: -30px 0 60px rgba(12, 8, 1, 0.2);
-                transform: translateX(100%);
-                transition: transform 0.35s ease;
+                inset: 0;
+                padding: 120px 26px 34px;
+                background: radial-gradient(circle at 20% 10%, rgba(232, 213, 196, 0.35), transparent 32%), rgba(254, 254, 254, 0.96);
+                backdrop-filter: blur(16px);
+                transform: translateY(-10px);
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.3s ease, transform 0.3s ease;
+                overflow-y: auto;
+                display: grid;
+                grid-template-rows: 1fr auto;
             }
 
             .site-header.is-nav-open .primary-nav {
-                transform: translateX(0);
+                opacity: 1;
+                pointer-events: auto;
+                transform: translateY(0);
             }
 
             .nav-cluster {
                 flex-direction: column;
-                align-items: flex-start;
-                gap: 28px;
+                align-items: stretch;
+                gap: 12px;
             }
 
             .dropdown-panel {
@@ -352,21 +413,71 @@
                 border: none;
                 border-radius: 0;
                 box-shadow: none;
-                padding: 8px 0 0;
+                padding: 14px 0 6px 12px;
                 display: none;
+                margin: 8px 0 0;
+                min-width: 0;
+                width: 100%;
             }
 
             .nav-cluster__item.is-open .dropdown-panel {
-                display: block;
+                display: grid;
+                gap: 10px;
+                transform: none;
             }
 
             .dropdown-link {
-                padding: 12px 0;
-                border-radius: 0;
+                padding: 12px 10px;
+                border-radius: 10px;
             }
 
             .header-toggle {
                 display: inline-flex;
+            }
+
+            .nav-cluster__item {
+                width: 100%;
+            }
+
+            .nav-trigger,
+            .nav-anchor {
+                width: 100%;
+                justify-content: space-between;
+                padding: 16px 0;
+                letter-spacing: 2.4px;
+                border-bottom: 1px solid rgba(28, 28, 28, 0.12);
+                font-size: 13px;
+            }
+
+            .nav-trigger::after,
+            .nav-anchor::after {
+                display: none;
+            }
+
+            .nav-cluster__item.is-open .nav-trigger {
+                color: var(--accent-gold);
+            }
+
+            .nav-mobile-cta {
+                display: grid;
+                gap: 12px;
+                padding-top: 18px;
+                margin-top: 12px;
+                border-top: 1px solid rgba(28, 28, 28, 0.12);
+                grid-row: 2;
+            }
+
+            .nav-mobile-cta .book-now-btn {
+                display: inline-flex;
+                justify-content: center;
+            }
+
+            .nav-close {
+                display: inline-flex;
+            }
+
+            .header-overlay {
+                background: rgba(17, 12, 10, 0.32);
             }
         }
 
@@ -381,6 +492,15 @@
 
             .site-header .book-now-btn {
                 display: none;
+            }
+
+            .nav-mobile-cta .book-now-btn {
+                display: inline-flex;
+            }
+
+            .nav-trigger,
+            .nav-anchor {
+                font-size: 12px;
             }
         }
 
@@ -1023,6 +1143,31 @@
 
         /* --- Responsive --- */
         @media (max-width: 1024px) {
+            .hero {
+                min-height: 100vh;
+                padding: 140px 40px 100px;
+                align-items: center;
+            }
+
+            .hero-content {
+                text-align: left;
+                margin: 0 auto;
+            }
+
+            .hero-cta {
+                justify-content: flex-start;
+                flex-wrap: wrap;
+            }
+
+            .location-intro,
+            .location-section,
+            .location-info,
+            .contact,
+            .location-gallery,
+            .location-video {
+                padding: 100px 44px;
+            }
+
             .gallery-shell {
                 grid-template-columns: 1fr;
             }
@@ -1067,6 +1212,43 @@
         }
 
         @media (max-width: 768px) {
+            .hero {
+                padding: 130px 26px 90px;
+                min-height: 100vh;
+            }
+
+            .hero-title {
+                font-size: 48px;
+            }
+
+            .hero-subtitle {
+                letter-spacing: 3px;
+            }
+
+            .hero-description {
+                font-size: 15px;
+                line-height: 1.7;
+                margin-bottom: 36px;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 12px;
+            }
+
+            .cta-primary,
+            .cta-secondary {
+                width: 100%;
+                text-align: center;
+            }
+
+            .contact-form,
+            .contact-cta .contact-cta-btn,
+            .form-submit {
+                width: 100%;
+            }
+
             .location-intro,
             .location-section,
             .location-info,
@@ -1089,6 +1271,63 @@
                 padding: 60px 30px 30px;
             }
         }
+
+        @media (max-width: 640px) {
+            .header-shell {
+                padding: 12px 16px;
+            }
+
+            .brand-mark img {
+                height: 44px;
+            }
+
+            .primary-nav {
+                padding: 110px 22px 26px;
+            }
+
+            .nav-trigger,
+            .nav-anchor {
+                font-size: 12px;
+                letter-spacing: 1.8px;
+            }
+
+            .location-intro,
+            .location-section,
+            .location-info,
+            .contact,
+            .location-gallery,
+            .location-video {
+                padding: 52px 20px;
+            }
+
+            .contact-form {
+                padding: 28px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .brand-mark img {
+                height: 40px;
+            }
+
+            .hero {
+                padding: 110px 18px 70px;
+                min-height: 100vh;
+            }
+
+            .hero-title {
+                font-size: 34px;
+                line-height: 1.2;
+            }
+
+            .hero-description {
+                font-size: 14px;
+            }
+
+            footer {
+                padding: 52px 20px 30px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1098,6 +1337,7 @@
                 <img src="../../images/logo.png" alt="Le Clat logo" loading="lazy">
             </a>
             <nav class="primary-nav" aria-label="Primary" data-header-nav>
+                <button class="nav-close" type="button" aria-label="Close navigation" data-nav-close>&times;</button>
                 <ul class="nav-cluster">
                 <li class="nav-cluster__item has-dropdown" data-dropdown>
                     <button class="nav-trigger" type="button" aria-expanded="false" data-dropdown-trigger>
@@ -1150,6 +1390,14 @@
                 <li class="nav-cluster__item"><a class="nav-anchor" href="https://haloweavedev.github.io/le-clat/salon/jayanagar/#visit">Visit</a></li>
                 <li class="nav-cluster__item"><a class="nav-anchor" href="https://haloweavedev.github.io/le-clat/salon/jayanagar/#contact">Contact</a></li>
                 </ul>
+                <div class="nav-mobile-cta">
+                    <button class="book-now-btn nav-book-btn" type="button" data-open-modal data-modal-context="Mobile Nav Book Now">Book an Appointment</button>
+                    <div class="nav-mobile-meta">
+                        <span class="nav-meta-label">Prefer to talk?</span>
+                        <a class="nav-meta-link" href="tel:+919900085245">+91 99000 85245</a>
+                        <a class="nav-meta-link" href="mailto:info@leclat.com">info@leclat.com</a>
+                    </div>
+                </div>
             </nav>
             <div class="header-cta">
                 <button class="book-now-btn" type="button" data-open-modal data-modal-context="Navigation Book Now">Book Now</button>
@@ -1723,6 +1971,7 @@
             trigger.addEventListener('click', (event) => {
                 event.preventDefault();
                 const context = trigger.dataset.modalContext || '';
+                closeNav();
                 openModal(context);
             });
         });
@@ -1820,6 +2069,10 @@
                 closeNav();
             });
         }
+
+        document.querySelectorAll('[data-nav-close]').forEach(btn => {
+            btn.addEventListener('click', closeNav);
+        });
 
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
