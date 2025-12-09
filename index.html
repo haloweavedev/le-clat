@@ -133,6 +133,8 @@
 
         .primary-nav {
             position: relative;
+            display: flex;
+            flex-direction: column;
         }
 
         .nav-cluster {
@@ -311,11 +313,41 @@
         }
 
         .site-header.is-nav-open .header-toggle span:first-child {
-            transform: rotate(45deg);
+            transform: translateY(0) rotate(45deg);
         }
 
         .site-header.is-nav-open .header-toggle span:last-child {
-            transform: rotate(-45deg);
+            transform: translateY(0) rotate(-45deg);
+        }
+
+        .nav-mobile-cta {
+            display: none;
+        }
+
+        .nav-mobile-cta .nav-book-btn {
+            width: 100%;
+            text-align: center;
+        }
+
+        .nav-mobile-meta {
+            display: grid;
+            gap: 6px;
+            font-size: 13px;
+            color: #3a3a3a;
+            letter-spacing: 0.5px;
+            line-height: 1.5;
+        }
+
+        .nav-mobile-meta .nav-meta-label {
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(28, 28, 28, 0.6);
+        }
+
+        .nav-mobile-meta .nav-meta-link {
+            color: inherit;
+            text-decoration: none;
         }
 
         .header-overlay {
@@ -372,12 +404,16 @@
                 top: 0;
                 right: 0;
                 bottom: 0;
-                width: min(360px, 80vw);
-                padding: 120px 32px 40px;
+                width: min(420px, 84vw);
+                padding: 120px 34px 34px;
                 background: rgba(254, 254, 254, 0.98);
-                box-shadow: -30px 0 60px rgba(12, 8, 1, 0.2);
-                transform: translateX(100%);
+                backdrop-filter: blur(18px);
+                box-shadow: -30px 0 60px rgba(12, 8, 1, 0.18);
+                transform: translateX(105%);
                 transition: transform 0.35s ease;
+                overflow-y: auto;
+                display: grid;
+                grid-template-rows: auto 1fr auto;
             }
 
             .site-header.is-nav-open .primary-nav {
@@ -386,8 +422,8 @@
 
             .nav-cluster {
                 flex-direction: column;
-                align-items: flex-start;
-                gap: 28px;
+                align-items: stretch;
+                gap: 8px;
             }
 
             .dropdown-panel {
@@ -399,8 +435,10 @@
                 border: none;
                 border-radius: 0;
                 box-shadow: none;
-                padding: 8px 0 0;
+                padding: 12px 0 4px 14px;
                 display: none;
+                border-left: 1px solid rgba(28, 28, 28, 0.12);
+                margin-left: 4px;
             }
 
             .nav-cluster__item.is-open .dropdown-panel {
@@ -408,12 +446,49 @@
             }
 
             .dropdown-link {
-                padding: 12px 0;
+                padding: 12px 4px;
                 border-radius: 0;
             }
 
             .header-toggle {
                 display: inline-flex;
+            }
+
+            .nav-cluster__item {
+                width: 100%;
+            }
+
+            .nav-trigger,
+            .nav-anchor {
+                width: 100%;
+                justify-content: space-between;
+                padding: 14px 0;
+                letter-spacing: 2px;
+                border-bottom: 1px solid rgba(28, 28, 28, 0.08);
+            }
+
+            .nav-trigger::after,
+            .nav-anchor::after {
+                display: none;
+            }
+
+            .nav-cluster__item.is-open .nav-trigger {
+                color: var(--accent-gold);
+            }
+
+            .nav-mobile-cta {
+                display: grid;
+                gap: 14px;
+                padding-top: 18px;
+                margin-top: 8px;
+                border-top: 1px solid rgba(28, 28, 28, 0.12);
+                grid-row: 3;
+                align-self: end;
+            }
+
+            .nav-mobile-cta .book-now-btn {
+                display: inline-flex;
+                justify-content: center;
             }
         }
 
@@ -428,6 +503,15 @@
 
             .site-header .book-now-btn {
                 display: none;
+            }
+
+            .nav-mobile-cta .book-now-btn {
+                display: inline-flex;
+            }
+
+            .nav-trigger,
+            .nav-anchor {
+                font-size: 11px;
             }
         }
 
@@ -1463,6 +1547,50 @@
         }
 
         @media (max-width: 1024px) {
+            .hero {
+                height: auto;
+                min-height: 82vh;
+                padding: 140px 40px 100px;
+                align-items: flex-start;
+            }
+
+            .hero-content {
+                text-align: left;
+                margin: 0 auto;
+            }
+
+            .hero-cta {
+                justify-content: flex-start;
+                flex-wrap: wrap;
+            }
+
+            .highlights {
+                padding: 80px 44px;
+            }
+
+            .services {
+                padding: 100px 44px;
+            }
+
+            .testimonials,
+            .franchise,
+            .contact,
+            .brand-intro {
+                padding: 100px 44px;
+            }
+
+            .section-header {
+                margin-bottom: 60px;
+            }
+
+            .service-image {
+                height: 340px;
+            }
+
+            .experience {
+                padding: 100px 44px;
+            }
+
             .highlights {
                 grid-template-columns: 1fr;
                 gap: 40px;
@@ -1486,20 +1614,230 @@
         }
 
         @media (max-width: 768px) {
+            .hero {
+                padding: 130px 26px 90px;
+                min-height: 74vh;
+            }
+
             .hero-title {
                 font-size: 48px;
+            }
+
+            .hero-subtitle {
+                letter-spacing: 3px;
+            }
+
+            .hero-description {
+                font-size: 15px;
+                line-height: 1.7;
+                margin-bottom: 36px;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 12px;
+            }
+
+            .cta-primary,
+            .cta-secondary {
+                width: 100%;
+                text-align: center;
             }
 
             .section-title {
                 font-size: 38px;
             }
 
+            .section-description {
+                font-size: 15px;
+            }
+
+            .service-content {
+                padding: 32px;
+            }
+
+            .service-title {
+                font-size: 28px;
+            }
+
+            .service-image {
+                height: 280px;
+            }
+
+            .experience-card {
+                height: 340px;
+            }
+
+            .contact-brand {
+                padding: 32px;
+            }
+
+            .contact-cta .contact-cta-btn,
+            .form-submit {
+                width: 100%;
+                text-align: center;
+            }
+
             .highlights, .services, .testimonials, .franchise, .contact {
+                padding: 60px 30px;
+            }
+
+            .brand-intro {
                 padding: 60px 30px;
             }
 
             footer {
                 padding: 60px 30px 30px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .header-shell {
+                padding: 12px 16px;
+            }
+
+            .brand-mark img {
+                height: 44px;
+            }
+
+            .primary-nav {
+                width: 100vw;
+                max-width: none;
+                padding: 110px 22px 26px;
+            }
+
+            .nav-trigger,
+            .nav-anchor {
+                font-size: 12px;
+                letter-spacing: 1.8px;
+            }
+
+            .nav-mobile-meta {
+                font-size: 12px;
+            }
+
+            .nav-mobile-meta .nav-meta-label {
+                letter-spacing: 1.6px;
+            }
+
+            .hero {
+                padding: 120px 20px 80px;
+            }
+
+            .hero-title {
+                font-size: 40px;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .highlights,
+            .services,
+            .testimonials,
+            .franchise,
+            .contact,
+            .brand-intro {
+                padding: 52px 20px;
+            }
+
+            .service-image {
+                height: 240px;
+            }
+
+            .service-content {
+                padding: 28px;
+            }
+
+            .services-grid {
+                gap: 28px;
+            }
+
+            .service-title {
+                font-size: 26px;
+            }
+
+            .service-list li {
+                padding: 16px 18px;
+                font-size: 13px;
+            }
+
+            .experience-card {
+                height: 300px;
+            }
+
+            .contact-brand {
+                padding: 28px;
+            }
+
+            .footer-logo {
+                font-size: 26px;
+            }
+
+            .footer-info {
+                font-size: 13px;
+            }
+
+            .social-links {
+                gap: 16px;
+            }
+
+            .floating-booking {
+                right: 16px;
+                bottom: 20px;
+            }
+
+            .floating-btn {
+                width: 52px;
+                height: 52px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .brand-mark img {
+                height: 40px;
+            }
+
+            .hero {
+                padding: 110px 18px 70px;
+                min-height: 68vh;
+            }
+
+            .hero-title {
+                font-size: 34px;
+                line-height: 1.2;
+            }
+
+            .hero-description {
+                font-size: 14px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .service-image {
+                height: 220px;
+            }
+
+            .service-content {
+                padding: 24px;
+            }
+
+            .contact-brand {
+                padding: 24px;
+            }
+
+            .social-links {
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .floating-btn {
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
             }
         }
     </style>
@@ -1563,6 +1901,14 @@
                 <li class="nav-cluster__item"><a class="nav-anchor" href="https://haloweavedev.github.io/le-clat/#franchise">Franchise</a></li>
                 <li class="nav-cluster__item"><a class="nav-anchor" href="https://haloweavedev.github.io/le-clat/#contact">Contact</a></li>
                 </ul>
+                <div class="nav-mobile-cta">
+                    <button class="book-now-btn nav-book-btn" type="button" data-open-modal data-modal-context="Mobile Nav Book Now">Book an Appointment</button>
+                    <div class="nav-mobile-meta">
+                        <span class="nav-meta-label">Prefer to talk?</span>
+                        <a class="nav-meta-link" href="tel:+910000000000">+91 00000 00000</a>
+                        <a class="nav-meta-link" href="mailto:info@leclat.com">info@leclat.com</a>
+                    </div>
+                </div>
             </nav>
             <div class="header-cta">
                 <button class="book-now-btn" type="button" data-open-modal data-modal-context="Navigation Book Now">Book Now</button>
@@ -2176,6 +2522,7 @@
             trigger.addEventListener('click', (event) => {
                 event.preventDefault();
                 const context = trigger.dataset.modalContext || '';
+                closeNav();
                 openModal(context);
             });
         });
