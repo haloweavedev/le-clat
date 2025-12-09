@@ -351,6 +351,29 @@
             text-decoration: none;
         }
 
+        .nav-close {
+            display: none;
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid rgba(28, 28, 28, 0.15);
+            background: rgba(254, 254, 254, 0.9);
+            color: var(--text-primary);
+            font-size: 20px;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.25s ease, transform 0.25s ease;
+        }
+
+        .nav-close:hover {
+            background: rgba(201, 169, 128, 0.15);
+            transform: translateY(-1px);
+        }
+
         .header-overlay {
             position: fixed;
             inset: 0;
@@ -420,6 +443,10 @@
                 opacity: 1;
                 pointer-events: auto;
                 transform: translateY(0);
+            }
+
+            .nav-close {
+                display: inline-flex;
             }
 
             .nav-cluster {
@@ -1858,6 +1885,7 @@
                 <img src="images/logo.png" alt="Le Clat logo" loading="lazy">
             </a>
             <nav class="primary-nav" aria-label="Primary" data-header-nav>
+                <button class="nav-close" type="button" aria-label="Close navigation" data-nav-close>&times;</button>
                 <ul class="nav-cluster">
                 <li class="nav-cluster__item has-dropdown" data-dropdown>
                     <button class="nav-trigger" type="button" aria-expanded="false" data-dropdown-trigger>
@@ -2675,6 +2703,10 @@
                 closeNav();
             });
         }
+
+        document.querySelectorAll('[data-nav-close]').forEach(btn => {
+            btn.addEventListener('click', closeNav);
+        });
 
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
