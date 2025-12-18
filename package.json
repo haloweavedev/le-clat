@@ -1,0 +1,11 @@
+{
+  "name": "le-clat-website",
+  "version": "1.0.0",
+  "description": "Le Clat Luxury Spa & Salon",
+  "scripts": {
+    "start": "vercel dev"
+  },
+  "dependencies": {
+    "nodemailer": "^6.9.13"
+  }
+}

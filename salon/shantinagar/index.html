@@ -1428,8 +1428,8 @@
                     <button type="button" class="contact-cta-btn" data-open-modal data-modal-context="Contact Panel CTA">Open Pop-Up Form</button>
                 </div>
             </div>
-            <form class="contact-form booking-form" action="https://formspree.io/f/xeoyzqoy" method="POST">
-                <input type="hidden" name="_next" value="https://haloweavedev.github.io/le-clat/thank-you.html">
+            <!-- Updated to use Custom Backend -->
+            <form class="contact-form booking-form">
                 <input type="hidden" name="form_origin" value="Shantinagar Location Page">
                 <div class="form-group">
                     <label class="form-label">Full Name</label>
@@ -1469,8 +1469,8 @@
             <button class="booking-modal__close" type="button" data-close-modal aria-label="Close booking form">&times;</button>
             <p class="booking-modal__title" id="bookingModalTitle">Reserve Your Ritual</p>
             <p class="booking-modal__description">Share your preference and our concierge team will reach out to curate your spa or salon journey at Le Clat.</p>
-            <form class="contact-form modal-form booking-form" id="modalBookingForm" action="https://formspree.io/f/xeoyzqoy" method="POST">
-                <input type="hidden" name="_next" value="https://haloweavedev.github.io/le-clat/thank-you.html">
+            <!-- Updated to use Custom Backend -->
+            <form class="contact-form modal-form booking-form" id="modalBookingForm">
                 <input type="hidden" name="form_origin" value="Shantinagar Modal">
                 <div class="form-group">
                     <label class="form-label">Full Name</label>
@@ -1796,6 +1796,60 @@
             if (!siteHeader) return;
             if (siteHeader.contains(event.target)) return;
             closeNav();
+        });
+
+        // Custom Backend URL (Relative path for Vercel)
+        const BACKEND_URL = '/api/send-email';
+
+        const handleFormSubmit = async (event) => {
+            event.preventDefault();
+            const form = event.target;
+            const submitButton = form.querySelector('.form-submit');
+            const originalLabel = submitButton ? submitButton.textContent : '';
+
+            if (submitButton) {
+                submitButton.disabled = true;
+                submitButton.textContent = 'Sending...';
+            }
+
+            const finalize = () => {
+                if (submitButton) {
+                    submitButton.disabled = false;
+                    submitButton.textContent = originalLabel;
+                }
+            };
+
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+
+            try {
+                const response = await fetch(BACKEND_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    form.reset();
+                    finalize();
+                    if (form.closest('.booking-modal')) {
+                        closeModal();
+                    }
+                    window.location.href = '../../thank-you.html';
+                } else {
+                    throw new Error('Server responded with an error');
+                }
+            } catch (error) {
+                console.error('Submission error:', error);
+                alert('We could not submit your request. Please check if the server is running or try again later.');
+                finalize();
+            }
+        };
+
+        document.querySelectorAll('.booking-form').forEach(form => {
+            form.addEventListener('submit', handleFormSubmit);
         });
     </script>
 </body>
