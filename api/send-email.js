@@ -37,7 +37,8 @@ const handler = async (req, res) => {
   try {
     // Email Content
     const mailOptions = {
-      from: `"${user_name}" <${user_email}>`, // Note: Some providers override this to the authenticated user
+      from: `"${user_name}" <${process.env.EMAIL_USER}>`, 
+      replyTo: user_email,
       to: process.env.RECEIVER_EMAIL,
       subject: `New Booking Request: ${user_name} - ${service_interest}`,
       html: `

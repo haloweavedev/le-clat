@@ -36,8 +36,9 @@ app.post('/api/send-email', async (req, res) => {
 
     // Email Content
     const mailOptions = {
-        from: `"${user_name}" <${user_email}>`, // Sender address (shows up as 'from' in your inbox)
-        to: process.env.RECEIVER_EMAIL, // List of receivers (your admin email)
+        from: `"${user_name}" <${process.env.EMAIL_USER}>`, 
+        replyTo: user_email,
+        to: process.env.RECEIVER_EMAIL, 
         subject: `New Booking Request: ${user_name} - ${service_interest}`,
         html: `
             <h2>New Appointment Request</h2>
