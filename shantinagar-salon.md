@@ -4,7 +4,7 @@
 Located in the heart of Shantinagar, **Le Clat Salon** offers an elevated grooming and beauty experience designed to bring out your natural radiance. Inspired by purity, finesse, and modern beauty culture, we combine expert techniques with premium products to give you results that feel as good as they look.  
 Whether it's everyday grooming, transformative hair care, or indulgent beauty rituals, our artists ensure every visit leaves you glowing with confidence.
 
----
+---ooo---
 
 **Our Services**
 
