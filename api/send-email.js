@@ -37,7 +37,7 @@ const handler = async (req, res) => {
   try {
     // Email Content
     const mailOptions = {
-      from: `"${user_name}" <${process.env.EMAIL_USER}>`, 
+      from: `"${user_name}" <${process.env.SENDER_EMAIL}>`, 
       replyTo: user_email,
       to: process.env.RECEIVER_EMAIL,
       subject: `New Booking Request: ${user_name} - ${service_interest}`,
