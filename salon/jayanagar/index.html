@@ -1686,7 +1686,8 @@
                     <button type="button" class="contact-cta-btn" data-open-modal data-modal-context="Contact Panel CTA">Open Pop-Up Form</button>
                 </div>
             </div>
-            <form class="contact-form booking-form" data-reveal>
+            <form class="contact-form booking-form" action="https://formspree.io/f/xeoyzqoy" method="POST">
+                <input type="hidden" name="_next" value="https://haloweavedev.github.io/le-clat/thank-you.html">
                 <input type="hidden" name="form_origin" value="Jayanagar Location Page">
                 <div class="form-group">
                     <label class="form-label">Full Name</label>
@@ -1726,7 +1727,8 @@
             <button class="booking-modal__close" type="button" data-close-modal aria-label="Close booking form">&times;</button>
             <p class="booking-modal__title" id="bookingModalTitle">Reserve Your Ritual</p>
             <p class="booking-modal__description">Share your preference and our concierge team will reach out to curate your spa or salon journey at Le Clat.</p>
-            <form class="contact-form modal-form booking-form" id="modalBookingForm">
+            <form class="contact-form modal-form booking-form" id="modalBookingForm" action="https://formspree.io/f/xeoyzqoy" method="POST">
+                <input type="hidden" name="_next" value="https://haloweavedev.github.io/le-clat/thank-you.html">
                 <input type="hidden" name="form_origin" value="Jayanagar Modal">
                 <div class="form-group">
                     <label class="form-label">Full Name</label>
@@ -1770,12 +1772,7 @@
         <button class="floating-btn" type="button" data-open-modal data-modal-context="Floating CTA">✦</button>
     </div>
 
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script>
-        const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
-        const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID';
-        const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
-
         const siteHeader = document.querySelector('[data-header]');
         const headerNav = siteHeader ? siteHeader.querySelector('[data-header-nav]') : null;
         const headerToggle = siteHeader ? siteHeader.querySelector('[data-header-toggle]') : null;
@@ -1826,22 +1823,6 @@
             document.body.classList.add('nav-open');
             if (headerToggle) headerToggle.setAttribute('aria-expanded', 'true');
         };
-
-        const hasEmailJsLibrary = typeof emailjs !== 'undefined';
-        const canUseEmailJs = hasEmailJsLibrary &&
-            EMAILJS_PUBLIC_KEY && !EMAILJS_PUBLIC_KEY.includes('YOUR_PUBLIC_KEY') &&
-            EMAILJS_SERVICE_ID && !EMAILJS_SERVICE_ID.includes('YOUR_SERVICE_ID') &&
-            EMAILJS_TEMPLATE_ID && !EMAILJS_TEMPLATE_ID.includes('YOUR_TEMPLATE_ID');
-
-        if (canUseEmailJs) {
-            emailjs.init({
-                publicKey: EMAILJS_PUBLIC_KEY,
-                blockHeadless: true,
-                limitRate: {
-                    throttle: 1500
-                }
-            });
-        }
 
         const handleScrollEffects = (scrollY) => {
             if (siteHeader) {
@@ -1992,50 +1973,6 @@
                 }
             });
         }
-
-        const handleFormSubmit = (event) => {
-            event.preventDefault();
-            const form = event.target;
-            const submitButton = form.querySelector('.form-submit');
-            const originalLabel = submitButton ? submitButton.textContent : '';
-
-            if (submitButton) {
-                submitButton.disabled = true;
-                submitButton.textContent = 'Sending...';
-            }
-
-            const finalize = () => {
-                if (submitButton) {
-                    submitButton.disabled = false;
-                    submitButton.textContent = originalLabel;
-                }
-            };
-
-            const onSuccess = () => {
-                form.reset();
-                finalize();
-                if (form.closest('.booking-modal')) {
-                    closeModal();
-                }
-                window.location.href = '../../thank-you.html';
-            };
-
-            if (!canUseEmailJs) {
-                onSuccess();
-                return;
-            }
-
-            emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, form)
-                .then(onSuccess)
-                .catch(() => {
-                    alert('We could not submit your request right now. Please try again shortly.');
-                    finalize();
-                });
-        };
-
-        document.querySelectorAll('.booking-form').forEach(form => {
-            form.addEventListener('submit', handleFormSubmit);
-        });
 
         const revealObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
