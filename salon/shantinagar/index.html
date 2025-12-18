@@ -1754,12 +1754,12 @@
             };
 
             const onSuccess = () => {
-                alert('Thank you for your booking request! We will contact you shortly.');
                 form.reset();
                 finalize();
                 if (form.closest('.booking-modal')) {
                     closeModal();
                 }
+                window.location.href = '../../thank-you.html';
             };
 
             if (!canUseEmailJs) {
