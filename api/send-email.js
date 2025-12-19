@@ -39,7 +39,7 @@ const handler = async (req, res) => {
     const mailOptions = {
       from: `"${user_name}" <${process.env.SENDER_EMAIL}>`, 
       replyTo: user_email,
-      to: process.env.RECEIVER_EMAIL,
+      to: `${process.env.RECEIVER_EMAIL}, leclatspasalon@chisleindia.com`,
       subject: `New Booking Request: ${user_name} - ${service_interest}`,
       html: `
             <h2>New Appointment Request</h2>
